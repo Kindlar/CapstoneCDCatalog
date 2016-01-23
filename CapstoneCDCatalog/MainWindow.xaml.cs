@@ -24,5 +24,44 @@ namespace CapstoneCDCatalog
         {
             InitializeComponent();
         }
-    }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddGenre("New Age");
+        }
+
+        private void AddGenre(string genreToAdd)
+        {
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                var genreList = db.Genres.ToList();
+
+                Genre genre = new Genre();
+                genre.GenreId = 0;
+                genre.GenreName = genreToAdd;
+                db.Genres.Add(genre);
+                db.SaveChanges();
+            }
+        }
+
+        private void removeButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveGenre("New Age");
+        }
+
+        private void RemoveGenre(string genreToRemove)
+        {
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                var genreList = db.Genres.ToList();
+
+                Genre genre = new Genre();
+                genre.GenreId = 0;
+                genre.GenreName = genreToRemove;
+                var value = db.Genres.Find(genre.GenreName);
+                db.Genres.Remove(value);
+                db.SaveChanges();
+            }
+        }
+    } 
 }

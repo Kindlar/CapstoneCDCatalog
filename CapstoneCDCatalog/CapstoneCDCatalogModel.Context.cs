@@ -13,10 +13,10 @@ namespace CapstoneCDCatalog
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class masterEntities : DbContext
+    public partial class CDCatalogEntities : DbContext
     {
-        public masterEntities()
-            : base("name=masterEntities")
+        public CDCatalogEntities()
+            : base("name=CDCatalogEntities")
         {
         }
     

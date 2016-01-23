@@ -12,7 +12,7 @@ namespace CapstoneCDCatalog.UnitTests
     {
 
         [Test]
-        public void Given()
+        public void GivenASong()
         {
             
         }
