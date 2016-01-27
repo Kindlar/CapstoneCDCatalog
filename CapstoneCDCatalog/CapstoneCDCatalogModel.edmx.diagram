@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c77d7ae573749a7bfe6c90ad0d05c1d" Name="Diagram1">
-        <EntityTypeShape EntityType="masterModel.Album" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Artist" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Genre" Width="1.5" PointX="5.375" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Song" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="masterModel.FK_Album_Artist" ManuallyRouted="false" />
-        <AssociationConnector Association="masterModel.FK_Song_Album" ManuallyRouted="false" />
-        <AssociationConnector Association="masterModel.FK_Song_Artist" ManuallyRouted="false" />
-        <AssociationConnector Association="masterModel.FK_Song_Genre" ManuallyRouted="false" />
+      <Diagram DiagramId="1af94928ec6e4c6ca2fe4cdb666f7e61" Name="Diagram1">
+        <EntityTypeShape EntityType="CapstoneCDCatalogModel.Album" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneCDCatalogModel.Artist" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneCDCatalogModel.Genre" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneCDCatalogModel.Song" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="CapstoneCDCatalogModel.FK_Album_Artist" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Album" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Artist" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Genre" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

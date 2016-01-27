@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="masterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CapstoneCDCatalogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
           </Key>
-          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AlbumTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AlbumYear" Type="int" Nullable="false" />
           <Property Name="AlbumRating" Type="int" Nullable="false" />
@@ -19,21 +19,21 @@
           <Key>
             <PropertyRef Name="ArtistId" />
           </Key>
-          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="ArtistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ArtistName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
             <PropertyRef Name="GenreId" />
           </Key>
-          <Property Name="GenreId" Type="int" Nullable="false" />
+          <Property Name="GenreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GenreName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Song">
           <Key>
             <PropertyRef Name="SongID" />
           </Key>
-          <Property Name="SongID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SongTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ArtistId" Type="int" Nullable="false" />
           <Property Name="TrackNumber" Type="int" Nullable="false" />
@@ -90,7 +90,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="masterModelStoreContainer">
+        <EntityContainer Name="CapstoneCDCatalogModelStoreContainer">
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
@@ -116,12 +116,12 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CapstoneCDCatalogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
           </Key>
-          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AlbumTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AlbumYear" Type="Int32" Nullable="false" />
           <Property Name="AlbumRating" Type="Int32" Nullable="false" />
@@ -133,7 +133,7 @@
           <Key>
             <PropertyRef Name="ArtistId" />
           </Key>
-          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ArtistName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Albums" Relationship="Self.FK_Album_Artist" FromRole="Artist" ToRole="Album" />
           <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Artist" FromRole="Artist" ToRole="Song" />
@@ -142,7 +142,7 @@
           <Key>
             <PropertyRef Name="GenreId" />
           </Key>
-          <Property Name="GenreId" Type="Int32" Nullable="false" />
+          <Property Name="GenreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GenreName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Genre" FromRole="Genre" ToRole="Song" />
         </EntityType>
@@ -150,7 +150,7 @@
           <Key>
             <PropertyRef Name="SongID" />
           </Key>
-          <Property Name="SongID" Type="Int32" Nullable="false" />
+          <Property Name="SongID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SongTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ArtistId" Type="Int32" Nullable="false" />
           <Property Name="TrackNumber" Type="Int32" Nullable="false" />
@@ -210,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CDCatalogEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CapstoneCDCatalogEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Albums" EntityType="Self.Album" />
           <EntitySet Name="Artists" EntityType="Self.Artist" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
@@ -237,9 +237,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="CDCatalogEntities">
+        <EntityContainerMapping StorageEntityContainer="CapstoneCDCatalogModelStoreContainer" CdmEntityContainer="CapstoneCDCatalogEntities">
           <EntitySetMapping Name="Albums">
-            <EntityTypeMapping TypeName="masterModel.Album">
+            <EntityTypeMapping TypeName="CapstoneCDCatalogModel.Album">
               <MappingFragment StoreEntitySet="Album">
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="AlbumTitle" ColumnName="AlbumTitle" />
@@ -250,7 +250,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Artists">
-            <EntityTypeMapping TypeName="masterModel.Artist">
+            <EntityTypeMapping TypeName="CapstoneCDCatalogModel.Artist">
               <MappingFragment StoreEntitySet="Artist">
                 <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
                 <ScalarProperty Name="ArtistName" ColumnName="ArtistName" />
@@ -258,7 +258,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Genres">
-            <EntityTypeMapping TypeName="masterModel.Genre">
+            <EntityTypeMapping TypeName="CapstoneCDCatalogModel.Genre">
               <MappingFragment StoreEntitySet="Genre">
                 <ScalarProperty Name="GenreId" ColumnName="GenreId" />
                 <ScalarProperty Name="GenreName" ColumnName="GenreName" />
@@ -266,7 +266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Songs">
-            <EntityTypeMapping TypeName="masterModel.Song">
+            <EntityTypeMapping TypeName="CapstoneCDCatalogModel.Song">
               <MappingFragment StoreEntitySet="Song">
                 <ScalarProperty Name="SongID" ColumnName="SongID" />
                 <ScalarProperty Name="SongTitle" ColumnName="SongTitle" />

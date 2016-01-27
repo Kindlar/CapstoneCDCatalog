@@ -72,10 +72,20 @@
     <Compile Include="Artist.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CapstoneCDCatalogModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CapstoneCDCatalogModel.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="CapstoneCDCatalogModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CapstoneCDCatalogModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="CDCatalogDataAccess.cs" />
     <Compile Include="Genre.cs">
@@ -91,16 +101,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CapstoneCDCatalogModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CapstoneCDCatalogModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CapstoneCDCatalogModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -143,6 +143,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="CapstoneCDCatalogModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
@@ -153,9 +156,6 @@
       <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
       <LastGenOutput>CapstoneCDCatalogModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

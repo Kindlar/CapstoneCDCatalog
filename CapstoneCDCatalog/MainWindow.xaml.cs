@@ -32,12 +32,9 @@ namespace CapstoneCDCatalog
 
         private void AddGenre(string genreToAdd)
         {
-            using (CDCatalogEntities db = new CDCatalogEntities())
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var genreList = db.Genres.ToList();
-
                 Genre genre = new Genre();
-                genre.GenreId = 0;
                 genre.GenreName = genreToAdd;
                 db.Genres.Add(genre);
                 db.SaveChanges();
@@ -51,16 +48,33 @@ namespace CapstoneCDCatalog
 
         private void RemoveGenre(string genreToRemove)
         {
-            using (CDCatalogEntities db = new CDCatalogEntities())
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                try
+                {
+                    Genre entry =
+                        db.Genres.Single(id => id.GenreName == genreToRemove);
+                    var value = db.Genres.Find(entry.GenreId);
+                    db.Genres.Remove(value);
+                    db.SaveChanges();
+                }
+                catch (InvalidOperationException mx)
+                {
+                    
+                }
+                catch (Exception)
+                {
+                    
+                }
+             }
+        }
+
+        private List<Genre> GetGenreList()
+        {
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
                 var genreList = db.Genres.ToList();
-
-                Genre genre = new Genre();
-                genre.GenreId = 0;
-                genre.GenreName = genreToRemove;
-                var value = db.Genres.Find(genre.GenreName);
-                db.Genres.Remove(value);
-                db.SaveChanges();
+                return genreList;
             }
         }
     } 
