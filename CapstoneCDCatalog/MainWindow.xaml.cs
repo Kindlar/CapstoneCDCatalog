@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Linq;
+using System.Windows;
 
 namespace CapstoneCDCatalog
 {
@@ -9,8 +11,7 @@ namespace CapstoneCDCatalog
         {
             InitializeComponent();
             this.Access = new CDCatalogDataAccess();
-            DisplayGenreList();
-            DisplayArtistList();
+            DisplayListBoxes();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -31,6 +32,46 @@ namespace CapstoneCDCatalog
             else
                 Access.RemoveGenre(genreToRemove);
             DisplayGenreList();
+        }
+
+        private void findButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void displayButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayListBoxes();
+        }
+
+        private void DisplayListBoxes()
+        {
+            DisplayArtistList();
+            DisplayGenreList();
+            DisplaySongList();
+            DisplayAlbumList();
+        }
+
+        private void DisplayAlbumList()
+        {
+           albumListBox.Items.Clear();
+            if (Access != null)
+            {
+                var albumList = Access.GetAlbumList().ToArray();
+                foreach (var album in albumList)
+                {
+                    albumListBox.Items.Add(album.AlbumTitle);
+                }
+            }
+        }
+
+        private void DisplaySongList()
+        {
+            if (Access != null)
+            {
+                var songList = Access.GetSongList().ToArray();
+                DisplaySong(songList);
+            }
         }
 
         private void DisplayGenreList()
@@ -58,6 +99,56 @@ namespace CapstoneCDCatalog
                 }
             }
         }
-       
+
+        private void albumListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (albumListBox.SelectedItem != null) DisplaySongsByOnThisAlbum(albumListBox.SelectedItem.ToString());
+        }
+
+        private void DisplaySongsByOnThisAlbum(string selectedItems)
+        {
+            if (Access != null)
+            {
+                var songList = Access.GetSongListByAlbum(selectedItems).ToArray();
+                DisplaySong(songList);
+            }           
+        }
+
+        private void genreListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (genreListBox.SelectedItem != null) DisplaySongsByGenre(genreListBox.SelectedItem.ToString());
+        }
+
+        private void DisplaySongsByGenre(string selectedItem)
+        {
+            if (Access != null)
+            {
+                var songList = Access.GetSongListByGenre(selectedItem).ToArray();
+                DisplaySong(songList);
+            }
+        }
+
+        private void DisplaySong(Song[] songList)
+        {
+            songListBox.Items.Clear();
+            foreach (var song in songList)
+            {
+                songListBox.Items.Add(song.SongTitle);
+            }
+        }
+
+        private void artistListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (artistListBox.SelectedItem != null) DisplaySongsByArtist(artistListBox.SelectedItem.ToString());
+        }
+
+        private void DisplaySongsByArtist(string selectedItem)
+        {
+            if (Access != null)
+            {
+                var songList = Access.GetSongListByArtist(selectedItem).ToArray();
+                DisplaySong(songList);
+            }
+        }
     } 
 }
