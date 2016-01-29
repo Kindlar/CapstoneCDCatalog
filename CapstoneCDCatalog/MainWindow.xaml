@@ -9,6 +9,10 @@
     <Grid>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="40,525,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
         <Button x:Name="removeButton" Content="Remove" HorizontalAlignment="Left" Margin="120,525,0,0" VerticalAlignment="Top" Width="75" Click="removeButton_Click"/>
+        <Label x:Name="genreLabel" Content="Genre" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="genreTextBox" HorizontalAlignment="Left" Height="23" Margin="57,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here"/>
+        <Label x:Name="genreListLabel" Content="Genres" HorizontalAlignment="Left" Margin="699,25,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="genreListBox" HorizontalAlignment="Left" Height="275" Margin="665,56,0,0" VerticalAlignment="Top" Width="117"/>
 
     </Grid>
 </Window>

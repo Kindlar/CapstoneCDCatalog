@@ -1,81 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace CapstoneCDCatalog
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public CDCatalogDataAccess Access { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            this.Access = new CDCatalogDataAccess();
+            DisplayGenreList();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            AddGenre("New Age");
-        }
-
-        private void AddGenre(string genreToAdd)
-        {
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
-            {
-                Genre genre = new Genre();
-                genre.GenreName = genreToAdd;
-                db.Genres.Add(genre);
-                db.SaveChanges();
-            }
+            var genreToAdd = genreTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(genreToAdd))
+                MessageBox.Show("Please correct your entry and try again");
+            else
+                Access.AddGenre(genreToAdd);
+            DisplayGenreList();
         }
 
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveGenre("New Age");
+            var genreToRemove = genreTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(genreToRemove))
+                MessageBox.Show("Please correct your entry and try again");
+            else
+                Access.RemoveGenre(genreToRemove);
+            DisplayGenreList();
         }
 
-        private void RemoveGenre(string genreToRemove)
+        private void DisplayGenreList()
         {
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            genreListBox.Items.Clear();
+            if (Access != null)
             {
-                try
+                var genrelist = Access.GetGenreList().ToArray();
+                foreach (var genre in genrelist)
                 {
-                    Genre entry =
-                        db.Genres.Single(id => id.GenreName == genreToRemove);
-                    var value = db.Genres.Find(entry.GenreId);
-                    db.Genres.Remove(value);
-                    db.SaveChanges();
+                    genreListBox.Items.Add(genre.GenreName);
                 }
-                catch (InvalidOperationException mx)
-                {
-                    
-                }
-                catch (Exception)
-                {
-                    
-                }
-             }
-        }
-
-        private List<Genre> GetGenreList()
-        {
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
-            {
-                var genreList = db.Genres.ToList();
-                return genreList;
             }
         }
+       
     } 
 }
