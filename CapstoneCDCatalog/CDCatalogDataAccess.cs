@@ -78,5 +78,14 @@ namespace CapstoneCDCatalog
                 }
             }
         }
+
+        public List<Artist> GetArtistList()
+        {
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                var artistList = db.Artists.ToList();
+                return artistList;
+            }
+        }
     }
 }

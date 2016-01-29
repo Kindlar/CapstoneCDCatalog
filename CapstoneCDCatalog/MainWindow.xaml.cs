@@ -2,7 +2,7 @@
 
 namespace CapstoneCDCatalog
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public CDCatalogDataAccess Access { get; set; }
         public MainWindow()
@@ -10,6 +10,7 @@ namespace CapstoneCDCatalog
             InitializeComponent();
             this.Access = new CDCatalogDataAccess();
             DisplayGenreList();
+            DisplayArtistList();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,19 @@ namespace CapstoneCDCatalog
                 foreach (var genre in genrelist)
                 {
                     genreListBox.Items.Add(genre.GenreName);
+                }
+            }
+        }
+
+        private void DisplayArtistList()
+        {
+            artistListBox.Items.Clear();
+            if (Access != null)
+            {
+                var artistList = Access.GetArtistList().ToArray();
+                foreach (var artist in artistList)
+                {
+                    artistListBox.Items.Add(artist.ArtistName);
                 }
             }
         }
