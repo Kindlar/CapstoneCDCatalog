@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
@@ -16,12 +17,8 @@ namespace CapstoneCDCatalog
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            var genreToAdd = genreTextBox.Text.Trim();
-            if (string.IsNullOrEmpty(genreToAdd))
-                MessageBox.Show("Please correct your entry and try again");
-            else
-                Access.AddGenre(genreToAdd);
-            DisplayGenreList();
+            if(!string.IsNullOrEmpty(genreTextBox.Text)) AddGenre(); 
+            if(!string.IsNullOrEmpty(artistTextBox.Text)) AddArtist();
         }
 
         private void removeButton_Click(object sender, RoutedEventArgs e)
@@ -116,7 +113,10 @@ namespace CapstoneCDCatalog
 
         private void genreListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (genreListBox.SelectedItem != null) DisplaySongsByGenre(genreListBox.SelectedItem.ToString());
+            if (genreListBox.SelectedItem != null)
+            {
+                DisplaySongsByGenre(genreListBox.SelectedItem.ToString());                
+            }
         }
 
         private void DisplaySongsByGenre(string selectedItem)
@@ -149,6 +149,27 @@ namespace CapstoneCDCatalog
                 var songList = Access.GetSongListByArtist(selectedItem).ToArray();
                 DisplaySong(songList);
             }
+        }
+
+        private void AddGenre()
+        {
+            var genreToAdd = genreTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(genreToAdd))
+                MessageBox.Show("Please correct your entry and try again");
+            else
+                Access.AddGenre(genreToAdd);
+            DisplayGenreList();
+        }
+
+        private void AddArtist()
+        {
+            var artistToAdd = artistTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(artistToAdd))
+            {
+            }
+            else
+                Access.AddArtist(artistToAdd);
+            DisplayArtistList();
         }
     } 
 }

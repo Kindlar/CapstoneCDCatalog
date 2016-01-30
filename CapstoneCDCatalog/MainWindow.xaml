@@ -17,7 +17,13 @@
         <TextBox x:Name="albumTextBox" HorizontalAlignment="Left" Height="23" Margin="93,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter album title here"/>
         <TextBox x:Name="albumYearTextBox" HorizontalAlignment="Left" Height="24" Margin="93,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <Label x:Name="albumYearLabel" Content="Album Year" HorizontalAlignment="Left" Margin="18,273,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="albumRatingComboBox" HorizontalAlignment="Left" Margin="93,302,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox x:Name="albumRatingComboBox" HorizontalAlignment="Left" Margin="93,302,0,0" VerticalAlignment="Top" Width="72">
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="3"></ComboBoxItem>
+            <ComboBoxItem Content="4"></ComboBoxItem>
+            <ComboBoxItem Content="5"></ComboBoxItem>
+        </ComboBox>
         <Label x:Name="albumRatingLabel" Content="Album Rating" HorizontalAlignment="Left" Margin="7,300,0,0" VerticalAlignment="Top"/>
         <Label x:Name="artistLabel" Content="Artist" HorizontalAlignment="Left" Margin="51,216,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="artistTextBox" HorizontalAlignment="Left" Height="23" Margin="93,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Enter band or  name here"/>
@@ -27,7 +33,13 @@
         <Label x:Name="trackLengthLabel" Content="Track Length" HorizontalAlignment="Left" Margin="11,161,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="trackNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="93,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <Label x:Name="trackNumberLabel" Content="Track Number" HorizontalAlignment="Left" Margin="5,132,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="songRatingComboBox" HorizontalAlignment="Left" Margin="93,105,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox x:Name="songRatingComboBox" HorizontalAlignment="Left" Margin="93,105,0,0" VerticalAlignment="Top" Width="72">
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="3"></ComboBoxItem>
+            <ComboBoxItem Content="4"></ComboBoxItem>
+            <ComboBoxItem Content="5"></ComboBoxItem>
+        </ComboBox>
         <Label x:Name="songRatingLabel" Content="Song Rating" HorizontalAlignment="Left" Margin="7,103,0,0" VerticalAlignment="Top"/>
         <Label x:Name="songLabe" Content="Song Title" HorizontalAlignment="Left" Margin="27,75,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="songTextBox" HorizontalAlignment="Left" Height="23" Margin="93,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here"/>

@@ -45,11 +45,10 @@ namespace CapstoneCDCatalog
 
         public void AddGenre(string genreToAdd)
         {
-            if (DoesGenreExisit(genreToAdd) == false)
+            if (DoesGenreExist(genreToAdd) == false)
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    DoesGenreExisit(genreToAdd);
                     Genre genre = new Genre();
                     genre.GenreName = genreToAdd;
                     db.Genres.Add(genre);
@@ -62,18 +61,79 @@ namespace CapstoneCDCatalog
             }
         }
 
-        private bool DoesGenreExisit(string genreToAdd)
+        public void AddArtist(string artistToAdd)
+        {
+            if (DoesArtistExist(artistToAdd) == false)
+            {
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    Artist artist = new Artist();
+                    artist.ArtistName = artistToAdd;
+                    db.Artists.Add(artist);
+                    db.SaveChanges();
+                }
+            }           
+        }
+        public void AddAlbum(string albumTitle, string albumYear, string albumRating, string artistTitle)
+        {
+            int year, rating;
+            int.TryParse(albumYear, out year);
+            int.TryParse(albumRating, out rating);
+            if (DoesAlbumExists(albumTitle, year))
+            {
+                var artist = GetArtistID(artistTitle);
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    Album album = new Album();
+                    album.AlbumTitle = albumTitle;
+                    album.AlbumYear = year;
+                    album.AlbumRating = rating;
+                    album.ArtistId = artist.ArtistId;
+                    db.Albums.Add(album);
+                    db.SaveChanges();
+                    //Need to verify if artist exists prior to attempting to add. 
+                }
+            }        
+        }
+
+        private bool DoesAlbumExists(string albumTitle, int albumYear)
+        {
+            var albumList = GetAlbumList();
+            bool doesAlbumExist = false;
+            foreach (var album in albumList)
+            {
+                if (albumTitle == album.AlbumTitle && albumYear == album.AlbumYear)
+                    doesAlbumExist = true;
+            }
+            return doesAlbumExist;
+        }
+
+        private bool DoesArtistExist(string artistToAdd)
+        {
+            var artistList = GetArtistList();
+            bool doesGenreExist = false;
+            foreach (var artist in artistList)
+            {
+                if (artistToAdd == artist.ArtistName)
+                {
+                    doesGenreExist = true;
+                }
+            }
+            return doesGenreExist;
+        }
+
+        private bool DoesGenreExist(string genreToAdd)
         {
             var genreList = GetGenreList();
-            bool doesGenreExisit = false;
+            bool doesGenreExist = false;
             foreach (var genre in genreList)
             {
                 if (genreToAdd == genre.GenreName)
                 {
-                    doesGenreExisit = true;
+                    doesGenreExist = true;
                 }
             }
-            return doesGenreExisit;
+            return doesGenreExist;
         }
 
         public void RemoveGenre(string genreToRemove)
@@ -82,7 +142,7 @@ namespace CapstoneCDCatalog
             {
                 try
                 {
-                    if (DoesGenreExisit(genreToRemove) == true)
+                    if (DoesGenreExist(genreToRemove) == true)
                     {
                         Genre entry =
                             db.Genres.Single(id => id.GenreName == genreToRemove);
