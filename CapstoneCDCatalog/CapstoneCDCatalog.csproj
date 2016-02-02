@@ -69,9 +69,11 @@
     <Compile Include="Album.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Artist.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\ArtistService.cs" />
     <Compile Include="CapstoneCDCatalogModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,10 +89,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="CDCatalogDataAccess.cs" />
+    <Compile Include="Services\SongService.cs" />
     <Compile Include="Genre.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\GenreService.cs" />
     <Compile Include="Song.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>

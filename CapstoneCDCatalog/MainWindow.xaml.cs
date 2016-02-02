@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
 {
     public partial class MainWindow
     {
-        public CDCatalogDataAccess Access { get; set; }
+        public SongService Access { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            this.Access = new CDCatalogDataAccess();
+            this.Access = new SongService();
             DisplayListBoxes();
         }
 
@@ -19,6 +20,8 @@ namespace CapstoneCDCatalog
         {
             if(!string.IsNullOrEmpty(genreTextBox.Text)) AddGenre(); 
             if(!string.IsNullOrEmpty(artistTextBox.Text)) AddArtist();
+            if(!string.IsNullOrEmpty(albumTextBox.Text)) AddAlbum();
+            if (!string.IsNullOrEmpty(songTextBox.Text)) AddSong();
         }
 
         private void removeButton_Click(object sender, RoutedEventArgs e)
@@ -27,7 +30,7 @@ namespace CapstoneCDCatalog
             if (string.IsNullOrEmpty(genreToRemove))
                 MessageBox.Show("Please correct your entry and try again");
             else
-                Access.RemoveGenre(genreToRemove);
+                Access.GenreService.RemoveGenre(genreToRemove);
             DisplayGenreList();
         }
 
@@ -54,7 +57,7 @@ namespace CapstoneCDCatalog
            albumListBox.Items.Clear();
             if (Access != null)
             {
-                var albumList = Access.GetAlbumList().ToArray();
+                var albumList = Access.AlbumService.GetAlbumList().ToArray();
                 foreach (var album in albumList)
                 {
                     albumListBox.Items.Add(album.AlbumTitle);
@@ -76,7 +79,7 @@ namespace CapstoneCDCatalog
             genreListBox.Items.Clear();
             if (Access != null)
             {
-                var genrelist = Access.GetGenreList().ToArray();
+                var genrelist = Access.GenreService.GetGenreList().ToArray();
                 foreach (var genre in genrelist)
                 {
                     genreListBox.Items.Add(genre.GenreName);
@@ -89,7 +92,7 @@ namespace CapstoneCDCatalog
             artistListBox.Items.Clear();
             if (Access != null)
             {
-                var artistList = Access.GetArtistList().ToArray();
+                var artistList = Access.ArtistService.GetArtistList().ToArray();
                 foreach (var artist in artistList)
                 {
                     artistListBox.Items.Add(artist.ArtistName);
@@ -123,7 +126,7 @@ namespace CapstoneCDCatalog
         {
             if (Access != null)
             {
-                var songList = Access.GetSongListByGenre(selectedItem).ToArray();
+                var songList = Access.GenreService.GetSongListByGenre(selectedItem).ToArray();
                 DisplaySong(songList);
             }
         }
@@ -152,24 +155,27 @@ namespace CapstoneCDCatalog
         }
 
         private void AddGenre()
-        {
-            var genreToAdd = genreTextBox.Text.Trim();
-            if (string.IsNullOrEmpty(genreToAdd))
-                MessageBox.Show("Please correct your entry and try again");
-            else
-                Access.AddGenre(genreToAdd);
+        { 
+            Access.GenreService.AddGenre(genreTextBox.Text.Trim());
             DisplayGenreList();
         }
 
         private void AddArtist()
         {
-            var artistToAdd = artistTextBox.Text.Trim();
-            if (string.IsNullOrEmpty(artistToAdd))
-            {
-            }
-            else
-                Access.AddArtist(artistToAdd);
+            Access.ArtistService.AddArtist(artistTextBox.Text.Trim());
             DisplayArtistList();
+        }
+
+        private void AddSong()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void AddAlbum()
+        {
+            if (!string.IsNullOrEmpty(albumTextBox.Text) && !string.IsNullOrEmpty(albumYearTextBox.Text) &&
+                !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()) && !string.IsNullOrEmpty(artistTextBox.Text))
+                Access.AlbumService.AddAlbum(albumTextBox.Text, albumYearTextBox.Text, albumRatingComboBox.SelectedItem.ToString(), artistTextBox.Text);            
         }
     } 
 }
