@@ -18,20 +18,13 @@ namespace CapstoneCDCatalog.Services
 
         public void AddGenre(string genreToAdd)
         {
-            if (DoesGenreExist(genreToAdd) == false)
-            {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
                     Genre genre = new Genre();
                     genre.GenreName = genreToAdd;
                     db.Genres.Add(genre);
                     db.SaveChanges();
-                }
-            }
-            else
-            {
-                MessageBox.Show("That genre already exisits.");
-            }
+                }           
         }
 
         private bool DoesGenreExist(string genreToAdd)
@@ -80,22 +73,27 @@ namespace CapstoneCDCatalog.Services
 
         public List<Song> GetSongListByGenre(string selectedItem)
         {
-            var genre = GetGenreID(selectedItem);
+            var genreID = GetGenreID(selectedItem);
 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var songList = Queryable.Where(db.Songs, x => x.GenreId == genre.GenreId).Select(x => x);
+                var songList = db.Songs.Where(x => x.GenreId == genreID).Select(x => x);
                 return songList.ToList();
             }
         }
-
-        private Genre GetGenreID(string selectedItem)
+         
+        public int GetGenreID(string selectedItem)
         {
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            if (!DoesGenreExist(selectedItem)) AddGenre(selectedItem);
+            else
             {
-                Genre genre = db.Genres.Single(x => x.GenreName == selectedItem);
-                return genre;
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    Genre genre = db.Genres.Single(x => x.GenreName == selectedItem);
+                    return genre.GenreId;
+                }
             }
+        return GetGenreID(selectedItem);
         }
     }
 }

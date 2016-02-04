@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,6 @@ namespace CapstoneCDCatalog.Services
 
         public void AddArtist(string artistToAdd)
         {
-            if (DoesArtistExist(artistToAdd) == false)
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
@@ -42,13 +42,16 @@ namespace CapstoneCDCatalog.Services
             return doesAlbumExist;
         }
 
-        public Artist GetArtistID(string selectedItem)
+        public int GetArtistID(string selectedItem)
         {
+            if(!DoesArtistExist(selectedItem)) AddArtist(selectedItem);
+            else
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                Artist genre = db.Artists.Single(x => x.ArtistName == selectedItem);
-                return genre;
+                Artist artist = db.Artists.Single(x => x.ArtistName == selectedItem);
+                return artist.ArtistId;
             }
+            return GetArtistID(selectedItem);
         }
     }
 }

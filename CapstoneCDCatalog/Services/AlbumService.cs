@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,29 +22,22 @@ namespace CapstoneCDCatalog.Services
             }
         }
 
-        public void AddAlbum(string albumTitle, string albumYear, string albumRating, string artistTitle)
+        public void AddAlbum(string albumTitle, int albumYear, int albumRating, string artistTitle)
         {
-            int year, rating;
-            int.TryParse(albumYear, out year);
-            int.TryParse(albumRating, out rating);
-            if (DoesAlbumExists(albumTitle, year))
-            {
-                var artist = songService.ArtistService.GetArtistID(artistTitle);
+                var artistID = songService.ArtistService.GetArtistID(artistTitle);
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
                     Album album = new Album();
                     album.AlbumTitle = albumTitle;
-                    album.AlbumYear = year;
-                    album.AlbumRating = rating;
-                    album.ArtistId = artist.ArtistId;
+                    album.AlbumYear = albumYear;
+                    album.AlbumRating = albumRating;
+                    album.ArtistId = artistID;
                     db.Albums.Add(album);
                     db.SaveChanges();
-                    //Need to verify if artist exists prior to attempting to add. 
-                }
-            }        
+                 }
         }
 
-        private bool DoesAlbumExists(string albumTitle, int albumYear)
+        public bool DoesAlbumExists(string albumTitle, int albumYear)
         {
             var albumList = GetAlbumList();
             bool doesAlbumExist = false;
@@ -55,13 +49,19 @@ namespace CapstoneCDCatalog.Services
             return doesAlbumExist;
         }
 
-        public Album GetAlbumID(string selectedItem)
+        public int GetAlbumID(string selectedItem)
         {
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
                 Album album = db.Albums.Single(x => x.AlbumTitle == selectedItem);
-                return album;
+                return album.AlbumId;
             }
+        }
+
+        internal int GetAlbumID(string album, int albumYear, int albumRating, string artist)
+        {
+            if(!DoesAlbumExists(album, albumYear)) AddAlbum(album, albumYear, albumRating, artist);
+            return GetAlbumID(album);
         }
     }
 }
