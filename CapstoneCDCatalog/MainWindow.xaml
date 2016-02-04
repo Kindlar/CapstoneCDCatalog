@@ -43,12 +43,11 @@
         <Label x:Name="songRatingLabel" Content="Song Rating" HorizontalAlignment="Left" Margin="7,103,0,0" VerticalAlignment="Top"/>
         <Label x:Name="songLabe" Content="Song Title" HorizontalAlignment="Left" Margin="27,75,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="songTextBox" HorizontalAlignment="Left" Height="23" Margin="93,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here"/>
-        <Button x:Name="findButton" Content="Find" HorizontalAlignment="Left" Margin="200,525,0,0" VerticalAlignment="Top" Width="75" Click="findButton_Click"/>
         <ListBox x:Name="albumListBox" HorizontalAlignment="Left" Height="390" Margin="544,56,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="albumListBox_SelectionChanged"/>
         <Label x:Name="albumListLabel" Content="Albums" HorizontalAlignment="Left" Margin="600,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0" Width="50"/>
         <Label x:Name="songLabel" Content="Songs" HorizontalAlignment="Left" Margin="386,33,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="songListBox" HorizontalAlignment="Left" Height="390" Margin="271,56,0,0" VerticalAlignment="Top" Width="268"/>
-        <Button x:Name="displayButton" Content="Display All" HorizontalAlignment="Left" Margin="280,525,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.253,0.773" Click="displayButton_Click"/>
+        <Button x:Name="displayButton" Content="Display All" HorizontalAlignment="Left" Margin="200,525,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.253,0.773" Click="displayButton_Click"/>
 
     </Grid>
 </Window>

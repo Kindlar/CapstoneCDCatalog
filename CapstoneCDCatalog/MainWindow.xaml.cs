@@ -15,9 +15,28 @@ namespace CapstoneCDCatalog
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            //if(!string.IsNullOrEmpty(albumTextBox.Text)) AddAlbum();
-            AddSong();
+            if(AreSongValuesValid())
+                AddSong();
+            else if (AreAlbumValuesValid())
+                AddAlbum();
+            else
+                DisplayError();
             DisplayListBoxes();
+        }
+
+        private bool AreAlbumValuesValid()
+        {
+            if (!string.IsNullOrEmpty(artistTextBox.Text)
+                && !string.IsNullOrEmpty(albumTextBox.Text)
+                && !string.IsNullOrEmpty(albumYearTextBox.Text)
+                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
+                return true;
+            return false;
+        }
+
+        private void DisplayError()
+        {
+            MessageBox.Show("You did not give enough information to add a song or an album");
         }
 
         private void removeButton_Click(object sender, RoutedEventArgs e)
@@ -33,11 +52,6 @@ namespace CapstoneCDCatalog
             else
                 Access.GenreService.RemoveGenre(genreToRemove);
             DisplayGenreList();
-        }
-
-        private void findButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void displayButton_Click(object sender, RoutedEventArgs e)
