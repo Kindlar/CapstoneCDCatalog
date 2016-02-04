@@ -54,14 +54,16 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    Song song = new Song();
-                    song.SongTitle = songToAdd;
-                    song.ArtistId = ArtistService.GetArtistID(artist);
-                    song.AlbumId = AlbumService.GetAlbumID(album, albumYear, albumRating, artist);
-                    song.GenreId = GenreService.GetGenreID(genre);
-                    song.TrackNumber = Convert.ToInt32(track);
-                    song.TrackLengthSeconds = Convert.ToInt32(trackLength);
-                    song.SongRating = songRating;
+                    Song song = new Song
+                    {
+                        SongTitle = songToAdd,
+                        ArtistId = ArtistService.GetArtistID(artist),
+                        AlbumId = AlbumService.GetAlbumID(album, albumYear, albumRating, artist),
+                        GenreId = GenreService.GetGenreID(genre),
+                        TrackNumber = Convert.ToInt32(track),
+                        TrackLengthSeconds = Convert.ToInt32(trackLength),
+                        SongRating = songRating
+                    };
                     db.Songs.Add(song);
                     db.SaveChanges();
                 }

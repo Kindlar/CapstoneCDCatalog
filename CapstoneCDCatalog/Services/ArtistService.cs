@@ -20,8 +20,7 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    Artist artist = new Artist();
-                    artist.ArtistName = artistToAdd;
+                    Artist artist = new Artist {ArtistName = artistToAdd};
                     db.Artists.Add(artist);
                     db.SaveChanges();
                 }

@@ -20,8 +20,7 @@ namespace CapstoneCDCatalog.Services
         {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    Genre genre = new Genre();
-                    genre.GenreName = genreToAdd;
+                    Genre genre = new Genre {GenreName = genreToAdd};
                     db.Genres.Add(genre);
                     db.SaveChanges();
                 }           

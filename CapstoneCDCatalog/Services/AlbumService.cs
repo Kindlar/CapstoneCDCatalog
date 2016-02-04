@@ -27,11 +27,13 @@ namespace CapstoneCDCatalog.Services
                 var artistID = songService.ArtistService.GetArtistID(artistTitle);
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    Album album = new Album();
-                    album.AlbumTitle = albumTitle;
-                    album.AlbumYear = albumYear;
-                    album.AlbumRating = albumRating;
-                    album.ArtistId = artistID;
+                    Album album = new Album
+                    {
+                        AlbumTitle = albumTitle,
+                        AlbumYear = albumYear,
+                        AlbumRating = albumRating,
+                        ArtistId = artistID
+                    };
                     db.Albums.Add(album);
                     db.SaveChanges();
                  }

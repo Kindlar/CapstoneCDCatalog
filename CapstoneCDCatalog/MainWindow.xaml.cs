@@ -24,21 +24,6 @@ namespace CapstoneCDCatalog
             DisplayListBoxes();
         }
 
-        private bool AreAlbumValuesValid()
-        {
-            if (!string.IsNullOrEmpty(artistTextBox.Text)
-                && !string.IsNullOrEmpty(albumTextBox.Text)
-                && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
-                return true;
-            return false;
-        }
-
-        private void DisplayError()
-        {
-            MessageBox.Show("You did not give enough information to add a song or an album");
-        }
-
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             RemoveGenre();
@@ -207,6 +192,20 @@ namespace CapstoneCDCatalog
             if (!string.IsNullOrEmpty(albumTextBox.Text) && !string.IsNullOrEmpty(albumYearTextBox.Text) &&
                 !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()) && !string.IsNullOrEmpty(artistTextBox.Text))
                 Access.AlbumService.AddAlbum(albumTextBox.Text, year, albumRating, artistTextBox.Text);            
+        }
+        private bool AreAlbumValuesValid()
+        {
+            if (!string.IsNullOrEmpty(artistTextBox.Text)
+                && !string.IsNullOrEmpty(albumTextBox.Text)
+                && !string.IsNullOrEmpty(albumYearTextBox.Text)
+                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
+                return true;
+            return false;
+        }
+
+        private void DisplayError()
+        {
+            MessageBox.Show("You did not give enough information to add a song or an album");
         }
     } 
 }
