@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace CapstoneCDCatalog.Services
 {
@@ -18,56 +16,23 @@ namespace CapstoneCDCatalog.Services
 
         public void AddGenre(string genreToAdd)
         {
-                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
-                {
-                    Genre genre = new Genre {GenreName = genreToAdd};
-                    db.Genres.Add(genre);
-                    db.SaveChanges();
-                }           
+             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+             {
+                Genre genre = new Genre {GenreName = genreToAdd};
+                db.Genres.Add(genre);
+                db.SaveChanges();
+             }           
         }
 
         private bool DoesGenreExist(string genreToAdd)
         {
-            var genreList = GetGenreList();
-            bool doesGenreExist = false;
-            foreach (var genre in genreList)
-            {
-                if (genreToAdd == genre.GenreName)
-                {
-                    doesGenreExist = true;
-                }
-            }
-            return doesGenreExist;
-        }
-
-        public void RemoveGenre(string genreToRemove)
-        {
+            bool result = false; 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                try
-                {
-                    if (DoesGenreExist(genreToRemove) == true)
-                    {
-                        Genre entry =
-                            db.Genres.Single(id => id.GenreName == genreToRemove);
-                        var value = db.Genres.Find(entry.GenreId);
-                        db.Genres.Remove(value);
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Item does not exisit");
-                    }
-                }
-                catch (InvalidOperationException mx)
-                {
-                    MessageBox.Show("There was a problem with your selection! Look: " + mx);
-                }
-                catch (Exception mx)
-                {
-                    MessageBox.Show("Something went wrong! Look: " + mx);
-                }
+                var genre = db.Genres.FirstOrDefault(x => x.GenreName == genreToAdd);
+                if(genre != null) result = true;
             }
+            return result;
         }
 
         public List<Song> GetSongListByGenre(string selectedItem)

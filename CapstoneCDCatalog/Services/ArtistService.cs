@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,16 +28,13 @@ namespace CapstoneCDCatalog.Services
 
         private bool DoesArtistExist(string artistToAdd)
         {
-            var artistList = GetArtistList();
-            bool doesAlbumExist = false;
-            foreach (var artist in artistList)
+            bool doesArtistExist = false;
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                if (artistToAdd == artist.ArtistName)
-                {
-                    doesAlbumExist = true;
-                }
+                var artist = db.Artists.FirstOrDefault(x => x.ArtistName == artistToAdd);
+                if (artist != null) doesArtistExist = true;
             }
-            return doesAlbumExist;
+            return doesArtistExist;
         }
 
         public int GetArtistID(string selectedItem)

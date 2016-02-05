@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace CapstoneCDCatalog
 {
     using System;
@@ -18,6 +20,7 @@ namespace CapstoneCDCatalog
         public CapstoneCDCatalogEntities()
             : base("name=CapstoneCDCatalogEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,5 +32,6 @@ namespace CapstoneCDCatalog
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Song> Songs { get; set; }
+        public virtual List<Artist> AlbumSongViews { get; set; }
     }
 }

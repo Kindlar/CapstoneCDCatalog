@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,13 +40,13 @@ namespace CapstoneCDCatalog.Services
 
         public bool DoesAlbumExists(string albumTitle, int albumYear)
         {
-            var albumList = GetAlbumList();
             bool doesAlbumExist = false;
-            foreach (var album in albumList)
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                if (albumTitle == album.AlbumTitle && albumYear == album.AlbumYear)
-                    doesAlbumExist = true;
+                var album = db.Albums.FirstOrDefault(x => x.AlbumTitle.ToLowerInvariant() == albumTitle.ToLowerInvariant());
+                if (album != null) doesAlbumExist = true;   
             }
+
             return doesAlbumExist;
         }
 

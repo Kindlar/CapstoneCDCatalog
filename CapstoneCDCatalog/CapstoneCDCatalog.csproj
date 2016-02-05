@@ -69,6 +69,9 @@
     <Compile Include="Album.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlbumSongView.cs">
+      <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Artist.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 
@@ -25,6 +27,16 @@ namespace CapstoneCDCatalog.Services
                 return songList;
             }
         }
+
+        //public List<AlbumSongView> GetView(string artistName)
+        //{
+        //    List <AlbumSongView> albumSongViews = new List<AlbumSongView>();
+        //    using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+        //    {
+        //        db.AlbumSongViews;
+        //        return albumSongViews = db.AlbumSongViews.Where(x => x.ArtistName == artistName).ToList();
+        //    }
+        //}
 
         public List<Song> GetSongListByAlbum(string selectedItems)
         {
@@ -78,14 +90,27 @@ namespace CapstoneCDCatalog.Services
         {
             bool result = false;
             {
-                var songList = GetSongList();
-                foreach (var song in songList)
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    if (song.SongTitle == songToAdd && song.Album.AlbumTitle == album)
-                        result = true;
+                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLowerInvariant() == songToAdd.ToLowerInvariant() 
+                                                         && x.Album.AlbumTitle.ToLowerInvariant() == album.ToLowerInvariant());
+                    if (song != null) result = true;
                 }
             }
             return result;
+        }
+
+        public void UpdateSongRating(string song, string album, int rating)
+        {
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                if (DoesSongExist(song, album))
+                {
+                    var songToUpdate = db.Songs.FirstOrDefault(x => x.SongTitle == song);
+                    songToUpdate.SongRating = rating;
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CapstoneCDCatalogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CapstoneCDCatalogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
@@ -41,6 +41,36 @@
           <Property Name="TrackLengthSeconds" Type="int" Nullable="false" />
           <Property Name="SongRating" Type="int" Nullable="false" />
           <Property Name="AlbumId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CapstoneCDCatalog.dbo.AlbumSongView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AlbumSongView">
+          <Key>
+            <PropertyRef Name="SongID" />
+            <PropertyRef Name="TrackNumber" />
+            <PropertyRef Name="GenreId" />
+            <PropertyRef Name="SongRating" />
+            <PropertyRef Name="TrackLengthSeconds" />
+            <PropertyRef Name="AlbumId" />
+            <PropertyRef Name="AlbumTitle" />
+            <PropertyRef Name="AlbumYear" />
+            <PropertyRef Name="AlbumRating" />
+            <PropertyRef Name="ArtistId" />
+            <PropertyRef Name="SongArtistID" />
+            <PropertyRef Name="SongTitle" />
+          </Key>
+          <Property Name="SongID" Type="int" Nullable="false" />
+          <Property Name="TrackNumber" Type="int" Nullable="false" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+          <Property Name="SongRating" Type="int" Nullable="false" />
+          <Property Name="TrackLengthSeconds" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="AlbumTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AlbumYear" Type="int" Nullable="false" />
+          <Property Name="AlbumRating" Type="int" Nullable="false" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="SongArtistID" Type="int" Nullable="false" />
+          <Property Name="SongTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Album_Artist">
           <End Role="Artist" Type="Self.Artist" Multiplicity="1" />
@@ -95,6 +125,22 @@
           <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumSongView" EntityType="Self.AlbumSongView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AlbumSongView].[SongID] AS [SongID], 
+    [AlbumSongView].[TrackNumber] AS [TrackNumber], 
+    [AlbumSongView].[GenreId] AS [GenreId], 
+    [AlbumSongView].[SongRating] AS [SongRating], 
+    [AlbumSongView].[TrackLengthSeconds] AS [TrackLengthSeconds], 
+    [AlbumSongView].[AlbumId] AS [AlbumId], 
+    [AlbumSongView].[AlbumTitle] AS [AlbumTitle], 
+    [AlbumSongView].[AlbumYear] AS [AlbumYear], 
+    [AlbumSongView].[AlbumRating] AS [AlbumRating], 
+    [AlbumSongView].[ArtistId] AS [ArtistId], 
+    [AlbumSongView].[SongArtistID] AS [SongArtistID], 
+    [AlbumSongView].[SongTitle] AS [SongTitle]
+    FROM [dbo].[AlbumSongView] AS [AlbumSongView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Album_Artist" Association="Self.FK_Album_Artist">
             <End Role="Artist" EntitySet="Artist" />
             <End Role="Album" EntitySet="Album" />
@@ -112,8 +158,7 @@
             <End Role="Song" EntitySet="Song" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CapstoneCDCatalogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -210,7 +255,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CapstoneCDCatalogEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CapstoneCDCatalogEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Albums" EntityType="Self.Album" />
           <EntitySet Name="Artists" EntityType="Self.Artist" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
@@ -231,7 +276,36 @@
             <End Role="Genre" EntitySet="Genres" />
             <End Role="Song" EntitySet="Songs" />
           </AssociationSet>
+          <EntitySet Name="AlbumSongViews" EntityType="CapstoneCDCatalogModel.AlbumSongView" />
         </EntityContainer>
+        <EntityType Name="AlbumSongView">
+          <Key>
+            <PropertyRef Name="SongID" />
+            <PropertyRef Name="TrackNumber" />
+            <PropertyRef Name="GenreId" />
+            <PropertyRef Name="SongRating" />
+            <PropertyRef Name="TrackLengthSeconds" />
+            <PropertyRef Name="AlbumId" />
+            <PropertyRef Name="AlbumTitle" />
+            <PropertyRef Name="AlbumYear" />
+            <PropertyRef Name="AlbumRating" />
+            <PropertyRef Name="ArtistId" />
+            <PropertyRef Name="SongArtistID" />
+            <PropertyRef Name="SongTitle" />
+          </Key>
+          <Property Name="SongID" Type="Int32" Nullable="false" />
+          <Property Name="TrackNumber" Type="Int32" Nullable="false" />
+          <Property Name="GenreId" Type="Int32" Nullable="false" />
+          <Property Name="SongRating" Type="Int32" Nullable="false" />
+          <Property Name="TrackLengthSeconds" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="AlbumTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumYear" Type="Int32" Nullable="false" />
+          <Property Name="AlbumRating" Type="Int32" Nullable="false" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <Property Name="SongArtistID" Type="Int32" Nullable="false" />
+          <Property Name="SongTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -276,6 +350,24 @@
                 <ScalarProperty Name="TrackLengthSeconds" ColumnName="TrackLengthSeconds" />
                 <ScalarProperty Name="SongRating" ColumnName="SongRating" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumSongViews">
+            <EntityTypeMapping TypeName="CapstoneCDCatalogModel.AlbumSongView">
+              <MappingFragment StoreEntitySet="AlbumSongView">
+                <ScalarProperty Name="SongTitle" ColumnName="SongTitle" />
+                <ScalarProperty Name="SongArtistID" ColumnName="SongArtistID" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="AlbumRating" ColumnName="AlbumRating" />
+                <ScalarProperty Name="AlbumYear" ColumnName="AlbumYear" />
+                <ScalarProperty Name="AlbumTitle" ColumnName="AlbumTitle" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="TrackLengthSeconds" ColumnName="TrackLengthSeconds" />
+                <ScalarProperty Name="SongRating" ColumnName="SongRating" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

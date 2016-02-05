@@ -8,7 +8,6 @@
         Title="Zach's CD Catalog" Height="800" Width="1020">
     <Grid>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="40,525,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
-        <Button x:Name="removeButton" Content="Remove" HorizontalAlignment="Left" Margin="120,525,0,0" VerticalAlignment="Top" Width="75" Click="removeButton_Click"/>
         <Label x:Name="genreLabel" Content="Genre" HorizontalAlignment="Left" Margin="47,188,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="genreTextBox" HorizontalAlignment="Left" Height="23" Margin="93,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here"/>
         <Label x:Name="genreListLabel" Content="Genres" HorizontalAlignment="Left" Margin="917,25,0,0" VerticalAlignment="Top"/>
@@ -48,6 +47,8 @@
         <Label x:Name="songLabel" Content="Songs" HorizontalAlignment="Left" Margin="386,33,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="songListBox" HorizontalAlignment="Left" Height="390" Margin="271,56,0,0" VerticalAlignment="Top" Width="268"/>
         <Button x:Name="displayButton" Content="Display All" HorizontalAlignment="Left" Margin="200,525,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.253,0.773" Click="displayButton_Click"/>
+        <Button x:Name="updateButton" Content="Update" HorizontalAlignment="Left" Margin="120,525,0,0" VerticalAlignment="Top" Width="75" Click="updateButton_Click"/>
+        <Grid x:Name="songDataGrid" HorizontalAlignment="Left" Height="147" Margin="453,547,0,0" VerticalAlignment="Top" Width="424"/>
 
     </Grid>
 </Window>
