@@ -1,0 +1,16 @@
+﻿<Window x:Name="PlayListForm1" x:Class="CapstoneCDCatalog.PlayListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CapstoneCDCatalog"
+        mc:Ignorable="d"
+        Title="PlayListWindiw" Height="814.404" Width="583.38">
+    <Grid>
+        <Button x:Name="getSongButton" Content="Get Random Song" HorizontalAlignment="Left" Margin="75,69,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="208" Margin="241,69,0,0" VerticalAlignment="Top" Width="229"/>
+        <TextBox x:Name="playListLengthTextBox" HorizontalAlignment="Left" Height="23" Margin="76,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.055,0.675"/>
+        <Label x:Name="playListLengthLabel" Content="Playlist Length in Seconds" HorizontalAlignment="Left" Margin="76,132,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

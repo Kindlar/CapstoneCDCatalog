@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 
@@ -28,15 +27,14 @@ namespace CapstoneCDCatalog.Services
             }
         }
 
-        //public List<AlbumSongView> GetView(string artistName)
-        //{
-        //    List <AlbumSongView> albumSongViews = new List<AlbumSongView>();
-        //    using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
-        //    {
-        //        db.AlbumSongViews;
-        //        return albumSongViews = db.AlbumSongViews.Where(x => x.ArtistName == artistName).ToList();
-        //    }
-        //}
+        public DbSet<AlbumSongView> GetView(string artistName)
+        {
+            DbSet<AlbumSongView> albumSongViews;
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                return albumSongViews = db.AlbumSongViews;
+            }
+        }
 
         public List<Song> GetSongListByAlbum(string selectedItems)
         {
@@ -92,8 +90,8 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLowerInvariant() == songToAdd.ToLowerInvariant() 
-                                                         && x.Album.AlbumTitle.ToLowerInvariant() == album.ToLowerInvariant());
+                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == songToAdd.ToLower()
+                                                         && x.Album.AlbumTitle.ToLower() == album.ToLower());
                     if (song != null) result = true;
                 }
             }

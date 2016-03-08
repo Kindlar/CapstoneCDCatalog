@@ -32,6 +32,6 @@ namespace CapstoneCDCatalog
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Song> Songs { get; set; }
-        public virtual List<Artist> AlbumSongViews { get; set; }
+        public virtual DbSet<AlbumSongView> AlbumSongViews { get; set; }
     }
 }

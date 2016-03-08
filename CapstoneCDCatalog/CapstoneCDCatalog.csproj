@@ -72,6 +72,10 @@
     <Compile Include="AlbumSongView.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlayList.cs" />
+    <Compile Include="PlayListWindow.xaml.cs">
+      <DependentUpon>PlayListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Artist.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
@@ -100,6 +104,10 @@
     <Compile Include="Song.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Page Include="PlayListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,6 +170,9 @@
       <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
       <LastGenOutput>CapstoneCDCatalogModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WindowsForms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

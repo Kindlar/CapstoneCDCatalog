@@ -43,7 +43,7 @@ namespace CapstoneCDCatalog.Services
             bool doesAlbumExist = false;
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var album = db.Albums.FirstOrDefault(x => x.AlbumTitle.ToLowerInvariant() == albumTitle.ToLowerInvariant());
+                var album = db.Albums.FirstOrDefault(x => x.AlbumTitle.ToLower() == albumTitle.ToLower());
                 if (album != null) doesAlbumExist = true;   
             }
 

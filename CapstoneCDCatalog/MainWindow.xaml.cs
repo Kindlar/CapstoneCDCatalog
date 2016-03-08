@@ -3,7 +3,7 @@ using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
 {
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         public SongService Access { get; set; }
         public MainWindow()
@@ -35,12 +35,6 @@ namespace CapstoneCDCatalog
             DisplayArtistList();
             DisplayAlbumList();
             DisplaySongList();
-            //DisplayView();
-        }
-
-        private void DisplayView()
-        {
-           
         }
 
         private void DisplayAlbumList()
@@ -207,6 +201,17 @@ namespace CapstoneCDCatalog
                 && !string.IsNullOrEmpty(albumTextBox.Text) 
                 && !string.IsNullOrEmpty(songTextBox.Text))
                 Access.UpdateSongRating(songTextBox.Text, albumTextBox.Text, rating);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void goToPlayListButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PlayListWindow();
+            window.Show();
         }
     } 
 }
