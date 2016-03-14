@@ -66,11 +66,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAlbumWindow.xaml.cs">
+      <DependentUpon>AddAlbumWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddSongWindow.xaml.cs">
+      <DependentUpon>AddSongWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Album.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AlbumSongView.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FindByArtistWindow.xaml.cs">
+      <DependentUpon>FindByArtistWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FindByGenreWindow.xaml.cs">
+      <DependentUpon>FindByGenreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FindByTitleWindow.xaml.cs">
+      <DependentUpon>FindByTitleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayList.cs" />
     <Compile Include="PlayListWindow.xaml.cs">
@@ -96,6 +111,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CapstoneCDCatalogModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Services\PlayListViewService.cs" />
     <Compile Include="Services\SongService.cs" />
     <Compile Include="Genre.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
@@ -104,6 +120,29 @@
     <Compile Include="Song.cs">
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UpdateRatingWindow.xaml.cs">
+      <DependentUpon>UpdateRatingWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddAlbumWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddSongWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FindByArtistWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FindByGenreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FindByTitleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PlayListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,6 +159,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateRatingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -171,9 +214,7 @@
       <LastGenOutput>CapstoneCDCatalogModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WindowsForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

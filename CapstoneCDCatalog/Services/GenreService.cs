@@ -24,12 +24,12 @@ namespace CapstoneCDCatalog.Services
              }           
         }
 
-        private bool DoesGenreExist(string genreToAdd)
+        public bool DoesGenreExist(string genreToAdd)
         {
             bool result = false; 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var genre = db.Genres.FirstOrDefault(x => x.GenreName == genreToAdd);
+                var genre = db.Genres.FirstOrDefault(x => x.GenreName.ToLower() == genreToAdd.ToLower());
                 if(genre != null) result = true;
             }
             return result;
@@ -58,6 +58,26 @@ namespace CapstoneCDCatalog.Services
                 }
             }
         return GetGenreID(selectedItem);
+        }
+
+        public List<Album> GetAlbumListByGenre(string selectedItem)
+        {
+            var genreID = GetGenreID(selectedItem);
+
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                var songList = db.Songs.Where(x => x.GenreId == genreID).Select(x => x.Album).Distinct();
+                return songList.ToList();
+            }
+        }
+
+        public string GetGenre(int genreId)
+        {
+            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+            {
+                Genre genre = db.Genres.Single(x => x.GenreId == genreId );
+                return genre.GenreName;
+            }
         }
     }
 }

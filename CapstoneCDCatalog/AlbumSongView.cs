@@ -14,17 +14,18 @@ namespace CapstoneCDCatalog
     
     public partial class AlbumSongView
     {
-        public int SongID { get; set; }
-        public int TrackNumber { get; set; }
-        public int GenreId { get; set; }
+        public string SongTitle { get; set; }
         public int SongRating { get; set; }
         public int TrackLengthSeconds { get; set; }
-        public int AlbumId { get; set; }
+        public int TrackNumber { get; set; }
         public string AlbumTitle { get; set; }
         public int AlbumYear { get; set; }
         public int AlbumRating { get; set; }
+        public string GenreName { get; set; }
+        public int SongID { get; set; }
+        public int GenreId { get; set; }
+        public int AlbumId { get; set; }
         public int ArtistId { get; set; }
         public int SongArtistID { get; set; }
-        public string SongTitle { get; set; }
     }
 }

@@ -1,0 +1,40 @@
+﻿<Window x:Class="CapstoneCDCatalog.UpdateRatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CapstoneCDCatalog"
+        mc:Ignorable="d"
+        Title="UpdateRatingWindow" Height="435.457" Width="579.224">
+    <Grid>
+        <ComboBox x:Name="albumComboBox" HorizontalAlignment="Left" Margin="20,275,0,0" VerticalAlignment="Top" Width="197"/>
+        <Label x:Name="albumLabel" Content="Album to Update" HorizontalAlignment="Left" Margin="20,249,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="albumRatingLabel" Content="Current Album Rating" HorizontalAlignment="Left" Margin="235,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.409,-0.097"/>
+        <Button x:Name="getCurrentRatingButton" Content="Get current rating" HorizontalAlignment="Left" Margin="97,302,0,0" VerticalAlignment="Top" Width="120" Click="getCurrentRatingButton_Click"/>
+        <Button x:Name="updateAlbumRatingButton" Content="Update album rating" HorizontalAlignment="Left" Margin="240,302,0,0" VerticalAlignment="Top" Width="120" Click="updateAlbumRatingButton_Click"/>
+        <TextBlock x:Name="updateAlbumRatingTextBlock" HorizontalAlignment="Left" Margin="20,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Height="58"/>
+        <ComboBox x:Name="albumRatingComboBox" HorizontalAlignment="Left" Margin="240,275,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="3"></ComboBoxItem>
+            <ComboBoxItem Content="4"></ComboBoxItem>
+            <ComboBoxItem Content="5"></ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="songToUpdateLabel" Content="What Song would you like to Update?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="songToUpdateTextBox" HorizontalAlignment="Left" Height="23" Margin="20,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+        <Button x:Name="searchForSongButton" Content="Get Song and Rating" HorizontalAlignment="Left" Margin="97,128,0,0" VerticalAlignment="Top" Width="120" Click="searchForSongButton_Click"/>
+        <ComboBox x:Name="songRatingComboBox" HorizontalAlignment="Left" Margin="240,42,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+        </ComboBox>
+        <Label x:Name="currentSongRatingLabel" Content="Current Song Rating" HorizontalAlignment="Left" Margin="240,11,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="updateSongRatingButton" Content="Update Song Rating" HorizontalAlignment="Left" Margin="240,69,0,0" VerticalAlignment="Top" Width="120" Click="updateSongRatingButton_Click"/>
+        <TextBlock x:Name="updateSongRatingTextBlock" HorizontalAlignment="Left" Margin="20,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="62" Width="340"/>
+        <Label x:Name="songAlbumToUpdateLabel" Content="What Album is that song on?" HorizontalAlignment="Left" Margin="20,69,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="songAlbumRatingTextBox" HorizontalAlignment="Left" Height="23" Margin="20,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+
+    </Grid>
+</Window>

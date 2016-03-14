@@ -5,49 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CapstoneCDCatalog"
         mc:Ignorable="d"
-        Title="Zach's CD Catalog" Height="800" Width="1020">
+        Title="Zach's CD Catalog" Height="556" Width="862">
     <Grid>
-        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="40,525,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
-        <Label x:Name="genreLabel" Content="Genre" HorizontalAlignment="Left" Margin="47,188,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="genreTextBox" HorizontalAlignment="Left" Height="23" Margin="93,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here" TabIndex="5"/>
-        <Label x:Name="genreListLabel" Content="Genres" HorizontalAlignment="Left" Margin="917,31,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="genreListBox" HorizontalAlignment="Left" Height="391" Margin="882,56,0,0" VerticalAlignment="Top" Width="117" SelectionChanged="genreListBox_SelectionChanged"/>
-        <Label x:Name="albumLabel" Content="Album" HorizontalAlignment="Left" Margin="44,244,0,0" VerticalAlignment="Top" ToolTip="Enter album name here."/>
-        <TextBox x:Name="albumTextBox" HorizontalAlignment="Left" Height="23" Margin="93,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter album title here" TabIndex="7"/>
-        <TextBox x:Name="albumYearTextBox" HorizontalAlignment="Left" Height="24" Margin="93,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" TabIndex="8"/>
-        <Label x:Name="albumYearLabel" Content="Album Year" HorizontalAlignment="Left" Margin="18,273,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="albumRatingComboBox" HorizontalAlignment="Left" Margin="93,302,0,0" VerticalAlignment="Top" Width="72" TabIndex="9">
-            <ComboBoxItem Content="1"></ComboBoxItem>
-            <ComboBoxItem Content="2"></ComboBoxItem>
-            <ComboBoxItem Content="3"></ComboBoxItem>
-            <ComboBoxItem Content="4"></ComboBoxItem>
-            <ComboBoxItem Content="5"></ComboBoxItem>
-        </ComboBox>
-        <Label x:Name="albumRatingLabel" Content="Album Rating" HorizontalAlignment="Left" Margin="7,300,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="artistLabel" Content="Artist" HorizontalAlignment="Left" Margin="51,216,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="artistTextBox" HorizontalAlignment="Left" Height="23" Margin="93,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Enter band or  name here" TabIndex="6"/>
-        <Label x:Name="artistListLabel" Content="Artist or band" HorizontalAlignment="Left" Margin="752,31,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="artistListBox" HorizontalAlignment="Left" Height="390" Margin="710,56,0,0" VerticalAlignment="Top" Width="167" SelectionChanged="artistListBox_SelectionChanged"/>
-        <TextBox x:Name="trackLengthTextBox" HorizontalAlignment="Left" Height="23" Margin="93,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" TabIndex="4"/>
-        <Label x:Name="trackLengthLabel" Content="Track Length" HorizontalAlignment="Left" Margin="11,161,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="trackNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="93,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" TabIndex="3"/>
-        <Label x:Name="trackNumberLabel" Content="Track Number" HorizontalAlignment="Left" Margin="5,132,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="songRatingComboBox" HorizontalAlignment="Left" Margin="93,105,0,0" VerticalAlignment="Top" Width="72" TabIndex="2">
-            <ComboBoxItem Content="1"></ComboBoxItem>
-            <ComboBoxItem Content="2"></ComboBoxItem>
-            <ComboBoxItem Content="3"></ComboBoxItem>
-            <ComboBoxItem Content="4"></ComboBoxItem>
-            <ComboBoxItem Content="5"></ComboBoxItem>
-        </ComboBox>
-        <Label x:Name="songRatingLabel" Content="Song Rating" HorizontalAlignment="Left" Margin="7,103,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="songLabe" Content="Song Title" HorizontalAlignment="Left" Margin="27,75,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="songTextBox" HorizontalAlignment="Left" Height="23" Margin="93,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" ToolTip="Please enter a genre here" TabIndex="1"/>
-        <ListBox x:Name="albumListBox" HorizontalAlignment="Left" Height="390" Margin="544,56,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="albumListBox_SelectionChanged"/>
-        <Label x:Name="albumListLabel" Content="Albums" HorizontalAlignment="Left" Margin="600,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0" Width="50"/>
-        <Label x:Name="songLabel" Content="Songs" HorizontalAlignment="Left" Margin="386,33,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="songListBox" HorizontalAlignment="Left" Height="390" Margin="271,56,0,0" VerticalAlignment="Top" Width="268"/>
-        <Button x:Name="displayButton" Content="Display All" HorizontalAlignment="Left" Margin="200,525,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.253,0.773" Click="displayButton_Click"/>
-        <Button x:Name="updateButton" Content="Update" HorizontalAlignment="Left" Margin="120,525,0,0" VerticalAlignment="Top" Width="75" Click="updateButton_Click"/>
-        <Button x:Name="goToPlayListButton" Content="Playlist" HorizontalAlignment="Left" Margin="40,552,0,0" VerticalAlignment="Top" Width="75" Click="goToPlayListButton_Click"/>
+        <Label x:Name="genreListLabel" Content="Genres" HorizontalAlignment="Left" Margin="734,16,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="genreListBox" HorizontalAlignment="Left" Height="390" Margin="699,39,0,0" VerticalAlignment="Top" Width="117" SelectionChanged="genreListBox_SelectionChanged"/>
+        <Label x:Name="artistListLabel" Content="Artist or band" HorizontalAlignment="Left" Margin="569,16,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="artistListBox" HorizontalAlignment="Left" Height="390" Margin="527,39,0,0" VerticalAlignment="Top" Width="167" SelectionChanged="artistListBox_SelectionChanged"/>
+        <ListBox x:Name="albumListBox" HorizontalAlignment="Left" Height="390" Margin="284,39,0,0" VerticalAlignment="Top" Width="238" SelectionChanged="albumListBox_SelectionChanged"/>
+        <Label x:Name="albumListLabel" Content="Albums" HorizontalAlignment="Left" Margin="378,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0" Width="50"/>
+        <Label x:Name="songLabel" Content="Songs" HorizontalAlignment="Left" Margin="125,16,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="songListBox" HorizontalAlignment="Left" Height="390" Margin="10,39,0,0" VerticalAlignment="Top" Width="268"/>
+        <Button x:Name="displayButton" Content="Redisplay All" HorizontalAlignment="Left" Margin="726,434,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.253,0.773" Click="displayButton_Click"/>
+        <Button x:Name="goToPlayListButton" Content="Playlist" HorizontalAlignment="Left" Margin="10,488,0,0" VerticalAlignment="Top" Width="90" Click="goToPlayListButton_Click"/>
+        <Button x:Name="findCdOrSongByTitleButton" Content="Find by Title" HorizontalAlignment="Left" Margin="10,461,0,0" VerticalAlignment="Top" Width="90" Click="findCdOrSongByTitleButton_Click"/>
+        <Button x:Name="findCdOrSongByArtistButton" Content="Find by Artist" HorizontalAlignment="Left" Margin="105,461,0,0" VerticalAlignment="Top" Width="90" Click="findCdOrSongByArtistButton_Click"/>
+        <Button x:Name="findCdOrSongByGenreButton" Content="Find by Genre" HorizontalAlignment="Left" Margin="200,461,0,0" VerticalAlignment="Top" Width="90" Click="findCdOrSongByGenreButton_Click"/>
+        <Button x:Name="updateRatingsButton" Content="Update Ratings" HorizontalAlignment="Left" Margin="200,434,0,0" VerticalAlignment="Top" Width="90" Click="updateRatingsButton_Click"/>
+        <Button x:Name="addAlbumButton" Content="Add Album" HorizontalAlignment="Left" Margin="105,434,0,0" VerticalAlignment="Top" Width="90" Click="addAlbumButton_Click"/>
+        <Button x:Name="addSongButton" Content="Add Song" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.027,1.545" Click="addSongButton_Click"/>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@
         <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Album" ManuallyRouted="false" />
         <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Artist" ManuallyRouted="false" />
         <AssociationConnector Association="CapstoneCDCatalogModel.FK_Song_Genre" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CapstoneCDCatalogModel.AlbumSongView" Width="2.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CapstoneCDCatalogModel.AlbumSongView" Width="2.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

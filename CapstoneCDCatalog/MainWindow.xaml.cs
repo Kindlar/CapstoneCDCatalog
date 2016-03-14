@@ -13,17 +13,6 @@ namespace CapstoneCDCatalog
             DisplayListBoxes();
         }
 
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(AreSongValuesValid())
-                AddSong();
-            else if (AreAlbumValuesValid())
-                AddAlbum();
-            else
-                DisplayError();
-            DisplayListBoxes();
-        }
-
         private void displayButton_Click(object sender, RoutedEventArgs e)
         {
             DisplayListBoxes();
@@ -139,78 +128,50 @@ namespace CapstoneCDCatalog
             }
         }
 
-        private void AddSong()
-        {
-            if (AreSongValuesValid())
-            {
-                int year, albumRating, songRating;
-                int.TryParse(albumRatingComboBox.Text, out albumRating); 
-                int.TryParse(albumYearTextBox.Text, out year);
-                int.TryParse(songRatingComboBox.Text, out songRating);
-                Access.AddSong(songTextBox.Text.Trim(), songTextBox.Text.Trim(), albumTextBox.Text.Trim(), trackNumberTextBox.Text.Trim(), 
-                    genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year,
-                    albumRating);
-            }
-        }
-
-        private bool AreSongValuesValid()
-        {
-            if(!string.IsNullOrEmpty(songTextBox.Text) 
-                && !string.IsNullOrEmpty(artistTextBox.Text) 
-                && !string.IsNullOrEmpty(albumTextBox.Text)
-                && !string.IsNullOrEmpty(trackNumberTextBox.Text) 
-                && !string.IsNullOrEmpty(genreTextBox.Text)
-                && !string.IsNullOrEmpty(trackLengthTextBox.Text) 
-                && !string.IsNullOrEmpty(songRatingComboBox.SelectedItem.ToString())
-                && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
-            return true;
-            return false;
-        }
-
-        private void AddAlbum()
-        {
-            int year, albumRating;
-            int.TryParse(albumYearTextBox.Text, out year);
-            int.TryParse(albumRatingComboBox.Text, out albumRating);
-
-            if (!string.IsNullOrEmpty(albumTextBox.Text) && !string.IsNullOrEmpty(albumYearTextBox.Text) &&
-                !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()) && !string.IsNullOrEmpty(artistTextBox.Text))
-                Access.AlbumService.AddAlbum(albumTextBox.Text, year, albumRating, artistTextBox.Text);            
-        }
-        private bool AreAlbumValuesValid()
-        {
-            if (!string.IsNullOrEmpty(artistTextBox.Text)
-                && !string.IsNullOrEmpty(albumTextBox.Text)
-                && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
-                return true;
-            return false;
-        }
-
         private static void DisplayError()
         {
             MessageBox.Show("You did not give enough information to add a song or an album");
         }
 
-        private void updateButton_Click(object sender, RoutedEventArgs e)
-        {
-            int rating;
-            int.TryParse(songRatingComboBox.Text, out rating);
-            if(songRatingComboBox.SelectedItem != null 
-                && !string.IsNullOrEmpty(albumTextBox.Text) 
-                && !string.IsNullOrEmpty(songTextBox.Text))
-                Access.UpdateSongRating(songTextBox.Text, albumTextBox.Text, rating);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void goToPlayListButton_Click(object sender, RoutedEventArgs e)
         {
             var window = new PlayListWindow();
+            window.Show();
+        }
+
+        private void findCdOrSongByTitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new FindByTitleWindow();
+            window.Show();
+        }
+
+        private void findCdOrSongByArtistButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new FindByArtistWindow();
+            window.Show();
+        }
+
+        private void findCdOrSongByGenreButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new FindByGenreWindow();
+            window.Show();
+        }
+
+        private void updateRatingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new UpdateRatingWindow();
+            window.Show();
+        }
+
+        private void addAlbumButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new AddAlbumWindow();
+            window.Show();
+        }
+
+        private void addSongButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new AddSongWindow();
             window.Show();
         }
     } 

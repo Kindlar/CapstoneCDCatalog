@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 
@@ -8,31 +8,22 @@ namespace CapstoneCDCatalog.Services
 {
     public class SongService
     {
+        public AlbumService AlbumService { get; }
+        public ArtistService ArtistService { get; }
+        public GenreService GenreService { get; } = new GenreService();
+
         public SongService()
         {
             AlbumService = new AlbumService(this);
             ArtistService = new ArtistService();
         }
-
-        public AlbumService AlbumService { get; }
-        public ArtistService ArtistService { get; }
-        public GenreService GenreService { get; } = new GenreService();
-
+        
         public List<Song> GetSongList()
         {
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
                 var songList = db.Songs.ToList();
                 return songList;
-            }
-        }
-
-        public DbSet<AlbumSongView> GetView(string artistName)
-        {
-            DbSet<AlbumSongView> albumSongViews;
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
-            {
-                return albumSongViews = db.AlbumSongViews;
             }
         }
 
@@ -72,7 +63,7 @@ namespace CapstoneCDCatalog.Services
                         GenreId = GenreService.GetGenreID(genre),
                         TrackNumber = Convert.ToInt32(track),
                         TrackLengthSeconds = Convert.ToInt32(trackLength),
-                        SongRating = songRating
+                        SongRating = songRating,
                     };
                     db.Songs.Add(song);
                     db.SaveChanges();
@@ -84,7 +75,7 @@ namespace CapstoneCDCatalog.Services
             }
         }
 
-        private bool DoesSongExist(string songToAdd, string album)
+        public bool DoesSongExist(string songToAdd, string album)
         {
             bool result = false;
             {
@@ -98,6 +89,19 @@ namespace CapstoneCDCatalog.Services
             return result;
         }
 
+        public Song GetSong(string songToAdd, string album)
+        {
+            {
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == songToAdd.ToLower()
+                                                         && x.Album.AlbumTitle.ToLower() == album.ToLower());
+                    if (song != null) return song;
+                }
+            }
+            return null;
+        }
+
         public void UpdateSongRating(string song, string album, int rating)
         {
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
@@ -109,6 +113,20 @@ namespace CapstoneCDCatalog.Services
                     db.SaveChanges();
                 }
             }
+        }
+
+        public List<Song> DoesSongExist(string titleToSearchFor)
+        {
+            var song = new List<Song>();
+            {
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    song = new List<Song> {db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == titleToSearchFor.ToLower())};
+                    if(song != null)
+                    return song;
+                }
+            }
+            return null;
         }
     }
 }

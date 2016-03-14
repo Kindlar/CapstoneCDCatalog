@@ -26,8 +26,9 @@ namespace CapstoneCDCatalog
         public Song GetRandomSong()
         {
             int randomSong = Random.Next(0, AllSongFromDatabase.Count);
-
-            return AllSongFromDatabase[randomSong];
+            Song song = AllSongFromDatabase[randomSong];
+            song.Album = SongService.AlbumService.GetAlbum(song.ArtistId);
+            return song;
         }
 
         public List<Song> GetRandomSongList(int seconds)
@@ -44,6 +45,6 @@ namespace CapstoneCDCatalog
                 } 
             }
             return ListOfSongs;
-        }
+        }       
     }
 }
