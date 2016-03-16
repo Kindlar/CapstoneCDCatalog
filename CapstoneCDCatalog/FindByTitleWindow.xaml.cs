@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -14,11 +15,22 @@ namespace CapstoneCDCatalog
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            if (titleToSearchForTextBox.Text == string.Empty) return;
-            var titleToSearchFor = titleToSearchForTextBox.Text;
-                
-            messageTextBlock.Text = SearchForSong(titleToSearchFor) ? "The song has been found!" : "The song was not found";
-            messageTextBlock.Text = SearchForAlbum(titleToSearchFor) ? "The album has been found!" : "The album or song does not exist.";
+            try
+            {
+                if (titleToSearchForTextBox.Text == string.Empty) return;
+                var titleToSearchFor = titleToSearchForTextBox.Text;
+
+                messageTextBlock.Text = SearchForSong(titleToSearchFor) ? "The song has been found!" : "The song was not found";
+                messageTextBlock.Text = SearchForAlbum(titleToSearchFor) ? "The album has been found!" : "The album or song does not exist.";
+            }
+            catch (NullReferenceException ex)
+            {
+                DisplayExceptions.DisplayNullReference(ex);
+            }
+            catch (Exception ex)
+            {
+                DisplayExceptions.DisplayException(ex);
+            }
         }
 
         private bool SearchForAlbum(string titleToSearchFor)

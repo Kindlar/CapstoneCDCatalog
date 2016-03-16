@@ -16,13 +16,25 @@ namespace CapstoneCDCatalog
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AreSongValuesValid())
+            try
             {
-                AddSong();
-                ClearBoxes();
+                if (AreSongValuesValid())
+                {
+                    AddSong();
+                    ClearBoxes();
+                    songTextBox.Focus();
+                }
+                else
+                    DisplayError();
             }
-            else
-                DisplayError();
+            catch (NullReferenceException ex)
+            {
+                DisplayExceptions.DisplayNullReference(ex);
+            }
+            catch (Exception ex)
+            {
+                DisplayExceptions.DisplayException(ex);
+            }
         }
 
         private void ClearBoxes()
@@ -31,38 +43,27 @@ namespace CapstoneCDCatalog
             IncreaseTrackNumber();
             trackLengthTextBox.Text = string.Empty;
             songRatingComboBox.Text = string.Empty;
+            addSongTextBlock.Text = string.Empty;
         }
 
         private void IncreaseTrackNumber()
         {
             int trackNumber;
             int.TryParse(trackNumberTextBox.Text, out trackNumber);
-            if(trackNumber > 0)
-            trackNumberTextBox.Text = (trackNumber + 1).ToString();
+            if (trackNumber > 0)
+                trackNumberTextBox.Text = (trackNumber + 1).ToString();
         }
 
         private void AddSong()
         {
-            try
-            {
-                if (!AreSongValuesValid() && !ComboBoxesAreSelected()) return;
-                int year, albumRating, songRating;
-                int.TryParse(albumRatingComboBox.Text, out albumRating);
-                int.TryParse(albumYearTextBox.Text, out year);
-                int.TryParse(songRatingComboBox.Text, out songRating);
-                Access.AddSong(songTextBox.Text.Trim(), artistTextBox.Text.Trim(), albumTextBox.Text.Trim(),
-                    trackNumberTextBox.Text.Trim(),
-                    genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year, albumRating);
-            }
-            catch (NullReferenceException nullEx)
-            {
-                MessageBox.Show($"Null problem: {nullEx.InnerException}");
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"There was an problem with: {ex.InnerException}");
-            }
+            if (!AreSongValuesValid() && !ComboBoxesAreSelected()) return;
+            int year, albumRating, songRating;
+            int.TryParse(albumRatingComboBox.Text, out albumRating);
+            int.TryParse(albumYearTextBox.Text, out year);
+            int.TryParse(songRatingComboBox.Text, out songRating);
+            Access.AddSong(songTextBox.Text.Trim(), artistTextBox.Text.Trim(), albumTextBox.Text.Trim(),
+                trackNumberTextBox.Text.Trim(),
+                genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year, albumRating);
         }
 
         private bool ComboBoxesAreSelected()
@@ -85,7 +86,7 @@ namespace CapstoneCDCatalog
 
         private void DisplayError()
         {
-            addSongTextBlock.Text = "You did not give enough information to add a song.";            
+            addSongTextBlock.Text = "You did not give enough information to add a song.";
         }
     }
 }

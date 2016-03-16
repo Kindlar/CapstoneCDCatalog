@@ -16,26 +16,37 @@ namespace CapstoneCDCatalog
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            if(AreTextInputsValid())
+            try
             {
-                int year, albumRating;
-                int.TryParse(albumYearTextBox.Text, out year);
-                int.TryParse(albumRatingComboBox.Text, out albumRating);
-                var albumTitle = albumTitleTextBox.Text;
-
-                if (Access.AlbumService.DoesAlbumExists(albumTitle, albumRating))
+                if (AreTextInputsValid())
                 {
-                    addAlbumTextBlock.Text = "Album already is present in catalog";
+                    int year, albumRating;
+                    int.TryParse(albumYearTextBox.Text, out year);
+                    int.TryParse(albumRatingComboBox.Text, out albumRating);
+                    var albumTitle = albumTitleTextBox.Text;
+
+                    if (Access.AlbumService.DoesAlbumExists(albumTitle, albumRating))
+                    {
+                        addAlbumTextBlock.Text = "Album already is present in catalog";
+                    }
+                    else
+                    {
+                        AddAlbum(albumTitle, year, albumRating);
+                        addAlbumTextBlock.Text = "The album has been added!";
+                    }
                 }
                 else
                 {
-                    AddAlbum(albumTitle, year, albumRating);
-                    addAlbumTextBlock.Text = "The album has been added!";
+                    addAlbumTextBlock.Text = "Please verify your inputs and try again";
                 }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                addAlbumTextBlock.Text = "Please verify your inputs and try again";
+                DisplayExceptions.DisplayNullReference(ex);
+            }
+            catch (Exception ex)
+            {
+                DisplayExceptions.DisplayException(ex);
             }
         }
 
@@ -43,17 +54,16 @@ namespace CapstoneCDCatalog
         {
             try
             {
-            return !string.IsNullOrEmpty(artistTextBox.Text)
-                   && !string.IsNullOrEmpty(albumTitleTextBox.Text)
-                   && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                   && !string.IsNullOrEmpty(albumRatingComboBox.Text);
+                return !string.IsNullOrEmpty(artistTextBox.Text)
+                       && !string.IsNullOrEmpty(albumTitleTextBox.Text)
+                       && !string.IsNullOrEmpty(albumYearTextBox.Text)
+                       && !string.IsNullOrEmpty(albumRatingComboBox.Text);
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show($"Please check all your unputs are valid: {ex}");
                 return false;
             }
-
         }
 
         private void AddAlbum(string albumTitle, int year, int albumRating)

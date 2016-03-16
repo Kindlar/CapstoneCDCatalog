@@ -128,11 +128,6 @@ namespace CapstoneCDCatalog
             DisplaySong(songList);
         }
 
-        private static void DisplayError()
-        {
-            MessageBox.Show("You did not give enough information to add a song or an album");
-        }
-
         private void goToPlayListButton_Click(object sender, RoutedEventArgs e)
         {
             var window = new PlayListWindow();

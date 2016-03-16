@@ -79,6 +79,7 @@
       <DependentUpon>CapstoneCDCatalogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CellFormating.cs" />
+    <Compile Include="DisplayExceptions.cs" />
     <Compile Include="FindByArtistWindow.xaml.cs">
       <DependentUpon>FindByArtistWindow.xaml</DependentUpon>
     </Compile>

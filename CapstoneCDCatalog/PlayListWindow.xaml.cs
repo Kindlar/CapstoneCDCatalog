@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using CapstoneCDCatalog.Services;
@@ -17,10 +18,20 @@ namespace CapstoneCDCatalog
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            int seconds;
-            int.TryParse(playListLengthTextBox.Text, out seconds);
-
-            GetPlayListWithSeconds(seconds);
+            try
+            {
+                int seconds;
+                int.TryParse(playListLengthTextBox.Text, out seconds);
+                GetPlayListWithSeconds(seconds);
+            }
+            catch (NullReferenceException ex)
+            {
+                DisplayExceptions.DisplayNullReference(ex);
+            }
+            catch (Exception ex)
+            {
+                DisplayExceptions.DisplayException(ex);
+            }
         }
 
         private void GetPlayListWithSeconds(int seconds)

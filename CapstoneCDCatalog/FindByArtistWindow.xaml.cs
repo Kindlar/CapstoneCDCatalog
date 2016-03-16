@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using CapstoneCDCatalog.Services;
@@ -33,15 +34,26 @@ namespace CapstoneCDCatalog
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectItem = findByArtistComboBox.Text;
-            if (selectItem != null)
+            try
             {
-                ListViewService listView = new ListViewService();
-                List<Song> songList = SongAccess.GetSongListByArtist(selectItem);
-                List<AlbumSongView> playListView = songList.Select(song => listView.CreateViewItem(song)).ToList();
+                var selectItem = findByArtistComboBox.Text;
+                if (selectItem != null)
+                {
+                    ListViewService listView = new ListViewService();
+                    List<Song> songList = SongAccess.GetSongListByArtist(selectItem);
+                    List<AlbumSongView> playListView = songList.Select(song => listView.CreateViewItem(song)).ToList();
 
-                findSongsByArtistDataGrid.ItemsSource = playListView;
-                findCdsByArtistDataGrid.ItemsSource = SongAccess.AlbumService.GetAlbumsByArtist(selectItem);
+                    findSongsByArtistDataGrid.ItemsSource = playListView;
+                    findCdsByArtistDataGrid.ItemsSource = SongAccess.AlbumService.GetAlbumsByArtist(selectItem);
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                DisplayExceptions.DisplayNullReference(ex);
+            }
+            catch (Exception ex)
+            {
+                DisplayExceptions.DisplayException(ex);
             }
         }
 
