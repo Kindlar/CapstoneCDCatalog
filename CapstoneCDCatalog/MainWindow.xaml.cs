@@ -7,11 +7,11 @@ namespace CapstoneCDCatalog
 {
     public partial class MainWindow : Window
     {
-        public SongService Access { get; set; }
+        public SongService Access { get; set; } = new SongService();
+
         public MainWindow()
         {
             InitializeComponent();
-            Access = new SongService();
             DisplayListBoxes();
         }
 

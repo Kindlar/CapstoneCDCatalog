@@ -5,12 +5,7 @@ namespace CapstoneCDCatalog.Services
 {
     public class ListViewService
     {
-        public SongService Service { get; set; } 
-
-        public ListViewService()
-        {
-            Service = new SongService();
-        }
+        public SongService Service { get; set; } = new SongService();
 
         public AlbumSongView CreateViewItem(Song song)
         {
@@ -25,7 +20,6 @@ namespace CapstoneCDCatalog.Services
                 TrackNumber = song.TrackNumber,
                 GenreName = Service.GenreService.GetGenre(song.GenreId)
              };
-            
             return view;
         }
 

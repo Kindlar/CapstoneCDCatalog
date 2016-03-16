@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using CapstoneCDCatalog.Services;
 
@@ -8,20 +7,19 @@ namespace CapstoneCDCatalog
 
     public partial class UpdateRatingWindow : Window
     {
-        public SongService SongAccess { get; set; }
+        public SongService SongAccess { get; set; } = new SongService();
 
         public UpdateRatingWindow()
         {
             InitializeComponent();
-            SongAccess = new SongService();
             PopulateAlbumComboBox();
         }
 
         private void PopulateAlbumComboBox()
         {
-            List<Album> Albumlist = SongAccess.AlbumService.GetAlbumList();
+            List<Album> albumlist = SongAccess.AlbumService.GetAlbumList();
 
-            foreach (var album in Albumlist)
+            foreach (var album in albumlist)
             {
                 albumComboBox.Items.Add(album.AlbumTitle);
             }
@@ -29,13 +27,11 @@ namespace CapstoneCDCatalog
 
         private void getCurrentRatingButton_Click(object sender, RoutedEventArgs e)
         {
-            updateAlbumRatingTextBlock.Text = String.Empty;
+            updateAlbumRatingTextBlock.Text = string.Empty;
             string albumToRate = albumComboBox.SelectedItem.ToString();
-            if (!string.IsNullOrEmpty(albumToRate))
-            {
-                var album = SongAccess.AlbumService.GetAlbum(albumToRate);
-                albumRatingComboBox.Text = album.AlbumRating.ToString();
-            }        
+            if (string.IsNullOrEmpty(albumToRate)) return;
+            var album = SongAccess.AlbumService.GetAlbum(albumToRate);
+            albumRatingComboBox.Text = album.AlbumRating.ToString();
         }
 
         private void updateAlbumRatingButton_Click(object sender, RoutedEventArgs e)
@@ -47,8 +43,8 @@ namespace CapstoneCDCatalog
             if (!string.IsNullOrEmpty(albumToRate))
             {
                 SongAccess.AlbumService.UpdateAlbumRating(albumToRate, newRating);
-                albumRatingComboBox.Text = String.Empty;
-                albumComboBox.Text = String.Empty;
+                albumRatingComboBox.Text = string.Empty;
+                albumComboBox.Text = string.Empty;
                 updateAlbumRatingTextBlock.Text = "The rating has been updated!";
             }
             else
@@ -59,7 +55,7 @@ namespace CapstoneCDCatalog
 
         private void searchForSongButton_Click(object sender, RoutedEventArgs e)
         {
-            songRatingComboBox.Text = String.Empty;
+            songRatingComboBox.Text = string.Empty;
             string songToRate = songToUpdateTextBox.Text;
             string albumOfsong = songAlbumRatingTextBox.Text;
             if (!string.IsNullOrEmpty(songToRate) && !string.IsNullOrEmpty(albumOfsong))
@@ -68,8 +64,6 @@ namespace CapstoneCDCatalog
                 {
                     var song = SongAccess.GetSong(songToRate, albumOfsong);
                     songRatingComboBox.Text = song.SongRating.ToString();
-
-
                 }
                 else
                 {
@@ -93,9 +87,9 @@ namespace CapstoneCDCatalog
             {
                 SongAccess.UpdateSongRating(songToRate, albumToRate, newRating);
                 updateSongRatingTextBlock.Text = "Song rating has been changed!";
-                songToUpdateTextBox.Text = String.Empty;
-                songRatingComboBox.Text = String.Empty;
-                songAlbumRatingTextBox.Text = String.Empty;
+                songToUpdateTextBox.Text = string.Empty;
+                songRatingComboBox.Text = string.Empty;
+                songAlbumRatingTextBox.Text = string.Empty;
             }
             else
             {

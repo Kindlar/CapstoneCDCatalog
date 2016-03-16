@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -42,14 +43,31 @@ namespace CapstoneCDCatalog
 
         private void AddSong()
         {
-            if (!AreSongValuesValid()) return;
-            int year, albumRating, songRating;
-            int.TryParse(albumRatingComboBox.Text, out albumRating);
-            int.TryParse(albumYearTextBox.Text, out year);
-            int.TryParse(songRatingComboBox.Text, out songRating);
-            Access.AddSong(songTextBox.Text.Trim(), artistTextBox.Text.Trim(), albumTextBox.Text.Trim(), trackNumberTextBox.Text.Trim(),
-                genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year,
-                albumRating);
+            try
+            {
+                if (!AreSongValuesValid() && !ComboBoxesAreSelected()) return;
+                int year, albumRating, songRating;
+                int.TryParse(albumRatingComboBox.Text, out albumRating);
+                int.TryParse(albumYearTextBox.Text, out year);
+                int.TryParse(songRatingComboBox.Text, out songRating);
+                Access.AddSong(songTextBox.Text.Trim(), artistTextBox.Text.Trim(), albumTextBox.Text.Trim(),
+                    trackNumberTextBox.Text.Trim(),
+                    genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year, albumRating);
+            }
+            catch (NullReferenceException nullEx)
+            {
+                MessageBox.Show($"Null problem: {nullEx.InnerException}");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"There was an problem with: {ex.InnerException}");
+            }
+        }
+
+        private bool ComboBoxesAreSelected()
+        {
+            return ((int) songRatingComboBox.SelectedItem > 0 && (int) albumRatingComboBox.SelectedItem > 0);
         }
 
         private bool AreSongValuesValid()
@@ -60,9 +78,9 @@ namespace CapstoneCDCatalog
                    && !string.IsNullOrEmpty(trackNumberTextBox.Text)
                    && !string.IsNullOrEmpty(genreTextBox.Text)
                    && !string.IsNullOrEmpty(trackLengthTextBox.Text)
-                   && !string.IsNullOrEmpty(songRatingComboBox.SelectedItem.ToString())
                    && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                   && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString());
+                   && albumRatingComboBox.SelectedItem != null
+                   && songRatingComboBox.SelectedItem != null;
         }
 
         private void DisplayError()

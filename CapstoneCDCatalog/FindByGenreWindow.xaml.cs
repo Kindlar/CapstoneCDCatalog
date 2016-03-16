@@ -7,12 +7,11 @@ namespace CapstoneCDCatalog
 {
     public partial class FindByGenreWindow : Window
     {
-        public SongService SongAccess { get; set; }
+        public SongService SongAccess { get; set; } = new SongService();
 
         public FindByGenreWindow()
         {
             InitializeComponent();
-            SongAccess = new SongService();
             PopulateGenres();
         }
 

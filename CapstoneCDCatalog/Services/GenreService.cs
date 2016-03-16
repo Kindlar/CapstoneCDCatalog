@@ -37,16 +37,16 @@ namespace CapstoneCDCatalog.Services
 
         public List<Song> GetSongListByGenre(string selectedItem)
         {
-            var genreID = GetGenreID(selectedItem);
+            var genreId = GetGenreId(selectedItem);
 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var songList = db.Songs.Where(x => x.GenreId == genreID).Select(x => x);
+                var songList = db.Songs.Where(x => x.GenreId == genreId).Select(x => x);
                 return songList.ToList();
             }
         }
          
-        public int GetGenreID(string selectedItem)
+        public int GetGenreId(string selectedItem)
         {
             if (!DoesGenreExist(selectedItem)) AddGenre(selectedItem);
             else
@@ -57,16 +57,16 @@ namespace CapstoneCDCatalog.Services
                     return genre.GenreId;
                 }
             }
-        return GetGenreID(selectedItem);
+        return GetGenreId(selectedItem);
         }
 
         public List<Album> GetAlbumListByGenre(string selectedItem)
         {
-            var genreID = GetGenreID(selectedItem);
+            var genreId = GetGenreId(selectedItem);
 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var songList = db.Songs.Where(x => x.GenreId == genreID).Select(x => x.Album).Distinct();
+                var songList = db.Songs.Where(x => x.GenreId == genreId).Select(x => x.Album).Distinct();
                 return songList.ToList();
             }
         }

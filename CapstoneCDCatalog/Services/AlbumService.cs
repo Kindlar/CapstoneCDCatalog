@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows.Documents;
 
@@ -8,11 +7,11 @@ namespace CapstoneCDCatalog.Services
 {
     public class AlbumService
     {
-        private readonly SongService songService;
+        private readonly SongService SongService;
 
         public AlbumService(SongService songService)
         {
-            this.songService = songService;
+            this.SongService = songService;
         }
 
         public AlbumService()
@@ -31,7 +30,7 @@ namespace CapstoneCDCatalog.Services
 
         public void AddAlbum(string albumTitle, int albumYear, int albumRating, string artistTitle)
         {
-                var artistID = songService.ArtistService.GetArtistID(artistTitle);
+                var artistId = SongService.ArtistService.GetArtistId(artistTitle);
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
                     Album album = new Album
@@ -39,7 +38,7 @@ namespace CapstoneCDCatalog.Services
                         AlbumTitle = albumTitle,
                         AlbumYear = albumYear,
                         AlbumRating = albumRating,
-                        ArtistId = artistID
+                        ArtistId = artistId
                     };
                     db.Albums.Add(album);
                     db.SaveChanges();

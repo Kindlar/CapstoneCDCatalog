@@ -6,7 +6,7 @@ namespace CapstoneCDCatalog
 {
     public class PlayList
     {
-        public SongService SongService { get; }
+        public SongService SongService { get; } = new SongService();
         public List<Song> ListOfSongs = new List<Song>();
         public List<Song> AllSongFromDatabase = new List<Song>();
         public Random Random = new Random();
@@ -14,7 +14,6 @@ namespace CapstoneCDCatalog
 
         public PlayList()
         {
-            SongService = new SongService();
             GetAllSongs();
         }
 
@@ -26,7 +25,7 @@ namespace CapstoneCDCatalog
         public Song GetRandomSong()
         {
             int randomSong = Random.Next(0, AllSongFromDatabase.Count);
-            Song song = AllSongFromDatabase[randomSong];
+            var song = AllSongFromDatabase[randomSong];
             song.Album = SongService.AlbumService.GetAlbum(song.ArtistId);
             return song;
         }

@@ -8,16 +8,14 @@ namespace CapstoneCDCatalog.Services
     public class SongService
     {
         public AlbumService AlbumService { get; }
-        public ArtistService ArtistService { get; }
-        public GenreService GenreService { get; }
+        public ArtistService ArtistService { get; } = new ArtistService();
+        public GenreService GenreService { get; } = new GenreService();
 
         public SongService()
         {
             AlbumService = new AlbumService(this);
-            ArtistService = new ArtistService();
-            GenreService = new GenreService();
         }
-        
+            
         public List<Song> GetSongList()
         {
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
@@ -29,18 +27,18 @@ namespace CapstoneCDCatalog.Services
 
         public List<Song> GetSongListByAlbum(string selectedItems)
         {
-            var albumID = AlbumService.GetAlbumID(selectedItems);
+            var albumId = AlbumService.GetAlbumID(selectedItems);
       
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                var songList = db.Songs.Where(x => x.AlbumId.Value == albumID).Select(x => x);
+                var songList = db.Songs.Where(x => x.AlbumId.Value == albumId).Select(x => x);
                 return songList.ToList();
             }        
         }
 
         public List<Song> GetSongListByArtist(string selectedItem)
         {
-            var artist = ArtistService.GetArtistID(selectedItem);
+            var artist = ArtistService.GetArtistId(selectedItem);
 
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
@@ -58,9 +56,9 @@ namespace CapstoneCDCatalog.Services
                     Song song = new Song
                     {
                         SongTitle = songToAdd,
-                        ArtistId = ArtistService.GetArtistID(artist),
+                        ArtistId = ArtistService.GetArtistId(artist),
                         AlbumId = AlbumService.GetAlbumID(album, albumYear, albumRating, artist),
-                        GenreId = GenreService.GetGenreID(genre),
+                        GenreId = GenreService.GetGenreId(genre),
                         TrackNumber = Convert.ToInt32(track),
                         TrackLengthSeconds = Convert.ToInt32(trackLength),
                         SongRating = songRating,
@@ -81,8 +79,8 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    var song = db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, songToAdd, StringComparison.CurrentCultureIgnoreCase)
-                                                         && String.Equals(x.Album.AlbumTitle, album, StringComparison.CurrentCultureIgnoreCase));
+                    var song = db.Songs.FirstOrDefault(x => (x.SongTitle.ToLower() ==  songToAdd.ToLower())
+                                                         && (x.Album.AlbumTitle.ToLower() == album.ToLower()));
                     if (song != null) result = true;
                 }
             }
@@ -94,8 +92,8 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    var song = db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, songToAdd, StringComparison.CurrentCultureIgnoreCase)
-                                                         && String.Equals(x.Album.AlbumTitle, album, StringComparison.CurrentCultureIgnoreCase));
+                    var song = db.Songs.FirstOrDefault(x => (x.SongTitle.ToLower() == songToAdd.ToLower())
+                                                         && (x.Album.AlbumTitle.ToLower() == album.ToLower()));
                     if (song != null) return song;
                 }
             }
@@ -119,7 +117,7 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    song = new List<Song> {db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, titleToSearchFor, StringComparison.CurrentCultureIgnoreCase))};
+                    song = new List<Song> {db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == titleToSearchFor.ToLower())};
                     return song;
                 }
             }

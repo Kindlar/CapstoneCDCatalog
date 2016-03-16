@@ -5,12 +5,11 @@ namespace CapstoneCDCatalog
 {
     public partial class FindByTitleWindow : Window
     {
-        public SongService SongAccess { get; set; }
+        public SongService SongAccess { get; set; } = new SongService();
 
         public FindByTitleWindow()
         {
             InitializeComponent();
-            SongAccess = new SongService();
         }
 
         private void searchButton_Click(object sender, RoutedEventArgs e)

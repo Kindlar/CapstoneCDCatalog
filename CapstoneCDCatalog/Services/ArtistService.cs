@@ -37,16 +37,18 @@ namespace CapstoneCDCatalog.Services
             return doesArtistExist;
         }
 
-        public int GetArtistID(string selectedItem)
+        public int GetArtistId(string selectedItem)
         {
-            if(!DoesArtistExist(selectedItem)) AddArtist(selectedItem);
+            if (!DoesArtistExist(selectedItem)) AddArtist(selectedItem);
             else
-            using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                Artist artist = db.Artists.Single(x => x.ArtistName == selectedItem);
-                return artist.ArtistId;
+                using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
+                {
+                    Artist artist = db.Artists.Single(x => x.ArtistName == selectedItem);
+                    return artist.ArtistId;
+                }
             }
-            return GetArtistID(selectedItem);
+            return GetArtistId(selectedItem);
         }
     }
 }
