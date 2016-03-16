@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -10,12 +9,13 @@ namespace CapstoneCDCatalog.Services
     {
         public AlbumService AlbumService { get; }
         public ArtistService ArtistService { get; }
-        public GenreService GenreService { get; } = new GenreService();
+        public GenreService GenreService { get; }
 
         public SongService()
         {
             AlbumService = new AlbumService(this);
             ArtistService = new ArtistService();
+            GenreService = new GenreService();
         }
         
         public List<Song> GetSongList()
@@ -81,8 +81,8 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == songToAdd.ToLower()
-                                                         && x.Album.AlbumTitle.ToLower() == album.ToLower());
+                    var song = db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, songToAdd, StringComparison.CurrentCultureIgnoreCase)
+                                                         && String.Equals(x.Album.AlbumTitle, album, StringComparison.CurrentCultureIgnoreCase));
                     if (song != null) result = true;
                 }
             }
@@ -94,8 +94,8 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    var song = db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == songToAdd.ToLower()
-                                                         && x.Album.AlbumTitle.ToLower() == album.ToLower());
+                    var song = db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, songToAdd, StringComparison.CurrentCultureIgnoreCase)
+                                                         && String.Equals(x.Album.AlbumTitle, album, StringComparison.CurrentCultureIgnoreCase));
                     if (song != null) return song;
                 }
             }
@@ -106,12 +106,10 @@ namespace CapstoneCDCatalog.Services
         {
             using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
             {
-                if (DoesSongExist(song, album))
-                {
-                    var songToUpdate = db.Songs.FirstOrDefault(x => x.SongTitle == song);
-                    songToUpdate.SongRating = rating;
-                    db.SaveChanges();
-                }
+                if (!DoesSongExist(song, album)) return;
+                var songToUpdate = db.Songs.FirstOrDefault(x => x.SongTitle == song);
+                songToUpdate.SongRating = rating;
+                db.SaveChanges();
             }
         }
 
@@ -121,12 +119,10 @@ namespace CapstoneCDCatalog.Services
             {
                 using (CapstoneCDCatalogEntities db = new CapstoneCDCatalogEntities())
                 {
-                    song = new List<Song> {db.Songs.FirstOrDefault(x => x.SongTitle.ToLower() == titleToSearchFor.ToLower())};
-                    if(song != null)
+                    song = new List<Song> {db.Songs.FirstOrDefault(x => String.Equals(x.SongTitle, titleToSearchFor, StringComparison.CurrentCultureIgnoreCase))};
                     return song;
                 }
             }
-            return null;
         }
     }
 }

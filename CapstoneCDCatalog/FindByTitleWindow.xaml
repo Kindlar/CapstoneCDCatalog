@@ -9,10 +9,10 @@
     <Grid>
         <TextBox x:Name="titleToSearchForTextBox" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210"/>
         <Label x:Name="titleLabel" Content="What song or CD are you looking for?" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="songOrCdDataGrid" HorizontalAlignment="Left" Margin="10,123,0,0" VerticalAlignment="Top" Height="232" Width="636" AutoGeneratingColumn="songOrCdDataGrid_AutoGeneratingColumn"/>
+        <DataGrid x:Name="songOrCdDataGrid" Margin="10,123,10,0" VerticalAlignment="Top" Height="232" AutoGeneratingColumn="songOrCdDataGrid_AutoGeneratingColumn"/>
         <TextBlock x:Name="messageTextBlock" HorizontalAlignment="Left" Margin="10,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="210"/>
         <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="225,37,0,0" VerticalAlignment="Top" Width="75" Click="searchButton_Click"/>
-        <DataGrid x:Name="albumDataGrid" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Height="182" Width="636"/>
+        <DataGrid x:Name="albumDataGrid" Margin="10,360,10,0" VerticalAlignment="Top" Height="182" AutoGeneratingColumn="albumDataGrid_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -27,10 +26,10 @@ namespace CapstoneCDCatalog
 
         private void ClearBoxes()
         {
-            songTextBox.Text = String.Empty;
+            songTextBox.Text = string.Empty;
             IncreaseTrackNumber();
-            trackLengthTextBox.Text = String.Empty;
-            songRatingComboBox.Text = String.Empty;
+            trackLengthTextBox.Text = string.Empty;
+            songRatingComboBox.Text = string.Empty;
         }
 
         private void IncreaseTrackNumber()
@@ -43,37 +42,32 @@ namespace CapstoneCDCatalog
 
         private void AddSong()
         {
-            if (AreSongValuesValid())
-            {
-                int year, albumRating, songRating;
-                int.TryParse(albumRatingComboBox.Text, out albumRating);
-                int.TryParse(albumYearTextBox.Text, out year);
-                int.TryParse(songRatingComboBox.Text, out songRating);
-                Access.AddSong(songTextBox.Text.Trim(), songTextBox.Text.Trim(), albumTextBox.Text.Trim(), trackNumberTextBox.Text.Trim(),
-                    genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year,
-                    albumRating);
-            }
+            if (!AreSongValuesValid()) return;
+            int year, albumRating, songRating;
+            int.TryParse(albumRatingComboBox.Text, out albumRating);
+            int.TryParse(albumYearTextBox.Text, out year);
+            int.TryParse(songRatingComboBox.Text, out songRating);
+            Access.AddSong(songTextBox.Text.Trim(), artistTextBox.Text.Trim(), albumTextBox.Text.Trim(), trackNumberTextBox.Text.Trim(),
+                genreTextBox.Text.Trim(), trackLengthTextBox.Text.Trim(), songRating, year,
+                albumRating);
         }
 
         private bool AreSongValuesValid()
         {
-            if (!string.IsNullOrEmpty(songTextBox.Text)
-                && !string.IsNullOrEmpty(artistTextBox.Text)
-                && !string.IsNullOrEmpty(albumTextBox.Text)
-                && !string.IsNullOrEmpty(trackNumberTextBox.Text)
-                && !string.IsNullOrEmpty(genreTextBox.Text)
-                && !string.IsNullOrEmpty(trackLengthTextBox.Text)
-                && !string.IsNullOrEmpty(songRatingComboBox.SelectedItem.ToString())
-                && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString()))
-                return true;
-            return false;
+            return !string.IsNullOrEmpty(songTextBox.Text)
+                   && !string.IsNullOrEmpty(artistTextBox.Text)
+                   && !string.IsNullOrEmpty(albumTextBox.Text)
+                   && !string.IsNullOrEmpty(trackNumberTextBox.Text)
+                   && !string.IsNullOrEmpty(genreTextBox.Text)
+                   && !string.IsNullOrEmpty(trackLengthTextBox.Text)
+                   && !string.IsNullOrEmpty(songRatingComboBox.SelectedItem.ToString())
+                   && !string.IsNullOrEmpty(albumYearTextBox.Text)
+                   && !string.IsNullOrEmpty(albumRatingComboBox.SelectedItem.ToString());
         }
 
         private void DisplayError()
         {
-            addSongTextBlock.Text = "You did not give enough information to add a song.";
-            
+            addSongTextBlock.Text = "You did not give enough information to add a song.";            
         }
     }
 }

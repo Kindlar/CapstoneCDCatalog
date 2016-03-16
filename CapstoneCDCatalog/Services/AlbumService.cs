@@ -130,5 +130,26 @@ namespace CapstoneCDCatalog.Services
                     db.SaveChanges();
             }
         }
+
+        public string GetAlbumTitle(int? albumId)
+        {
+            Album album = new Album();
+            if (albumId != null) album = GetAlbum((int)albumId);
+            return album.AlbumTitle;
+        }
+
+        public int GetAlbumRating(int? albumId)
+        {
+            Album album = new Album();
+            if (albumId != null) album = GetAlbum((int) albumId);
+            return album.AlbumRating;
+        }
+
+        public int GetAlbumYear(int? albumId)
+        {
+            Album album = new Album();
+            if (albumId != null) album = GetAlbum((int)albumId);
+            return album.AlbumYear;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using CapstoneCDCatalog.Services;
 
@@ -17,9 +18,9 @@ namespace CapstoneCDCatalog
 
         private void PopulateArtistComboBox()
         {
-            List<Artist> Artistlist = SongAccess.ArtistService.GetArtistList();
+            List<Artist> artistlist = SongAccess.ArtistService.GetArtistList();
 
-            foreach (var artist in Artistlist)
+            foreach (var artist in artistlist)
             {
                 findByArtistComboBox.Items.Add(artist.ArtistName);
             }
@@ -35,25 +36,26 @@ namespace CapstoneCDCatalog
             var selectItem = findByArtistComboBox.Text;
             if (selectItem != null)
             {
-                findSongsByArtistDataGrid.ItemsSource = SongAccess.GetSongListByArtist(selectItem);
+                ListViewService listView = new ListViewService();
+                List<Song> songList = SongAccess.GetSongListByArtist(selectItem);
+                List<AlbumSongView> playListView = songList.Select(song => listView.CreateViewItem(song)).ToList();
+
+                findSongsByArtistDataGrid.ItemsSource = playListView;
                 findCdsByArtistDataGrid.ItemsSource = SongAccess.AlbumService.GetAlbumsByArtist(selectItem);
             }
         }
 
         private void findSongsByArtistDataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "SongID" || e.PropertyName == "GenreId" || e.PropertyName == "AlbumId" || e.PropertyName == "ArtistId")
-            {
-                e.Cancel = true;
-            }
+            CellFormating.SupressIdValues(e);
+            CellFormating.SpaceOutNames(e);
         }
 
         private void findCdsByArtistDataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "SongID" || e.PropertyName == "GenreId" || e.PropertyName == "AlbumId" || e.PropertyName == "ArtistId")
-            {
-                e.Cancel = true;
-            }
+            CellFormating.SupressIdValues(e);
+            CellFormating.SuppressAlbumData(e);
+            CellFormating.SpaceOutNames(e);
         }
     }
 }

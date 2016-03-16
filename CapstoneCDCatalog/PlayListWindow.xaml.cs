@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -26,25 +25,18 @@ namespace CapstoneCDCatalog
 
         private void GetPlayListWithSeconds(int seconds)
         {
-            PlayListViewService playlist = new PlayListViewService();
+            ListViewService playlist = new ListViewService();
             playListDataGrid.ItemsSource = string.Empty;
 
             var play = PlayList.GetRandomSongList(seconds);
-            List<AlbumSongView> thing = play.Select(song => playlist.CreateViewItem(song)).ToList();
-            playListDataGrid.ItemsSource = thing;
-
-
-            //playListDataGrid.ItemsSource = PlayList.GetRandomSongList(seconds);                     
+            List<AlbumSongView> playListView = play.Select(song => playlist.CreateViewItem(song)).ToList();
+            playListDataGrid.ItemsSource = playListView;
         }
 
         private void playListDataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "SongID" || e.PropertyName == "GenreId" || e.PropertyName == "AlbumId" || e.PropertyName == "ArtistId" || e.PropertyName == "SongArtistID")
-            {
-                e.Cancel = true;
-            }
-
-            
+            CellFormating.SupressIdValues(e);
+            CellFormating.SpaceOutNames(e);
         }
     }
 }

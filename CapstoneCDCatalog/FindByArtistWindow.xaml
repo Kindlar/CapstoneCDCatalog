@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CapstoneCDCatalog"
         mc:Ignorable="d"
-        Title="FindByArtistWindow" Height="435.083" Width="723.822">
+        Title="FindByArtistWindow" Height="435.083" Width="746.134">
     <Grid>
         <Label x:Name="findbyArtistLabel" Content="What artist would you like to find information on?" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="findByArtistComboBox" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="266" SelectionChanged="findByArtistComboBox_SelectionChanged"/>
-        <DataGrid x:Name="findSongsByArtistDataGrid" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Height="173" Width="692" AutoGeneratingColumn="findSongsByArtistDataGrid_AutoGeneratingColumn"/>
+        <DataGrid x:Name="findSongsByArtistDataGrid" Margin="10,58,14,0" VerticalAlignment="Top" Height="173" AutoGeneratingColumn="findSongsByArtistDataGrid_AutoGeneratingColumn"/>
         <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="288,31,0,0" VerticalAlignment="Top" Width="75" Click="searchButton_Click"/>
-        <DataGrid x:Name="findCdsByArtistDataGrid" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Height="159" Width="692" AutoGeneratingColumn="findCdsByArtistDataGrid_AutoGeneratingColumn"/>
+        <DataGrid x:Name="findCdsByArtistDataGrid" Margin="10,236,14,0" VerticalAlignment="Top" Height="159" AutoGeneratingColumn="findCdsByArtistDataGrid_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

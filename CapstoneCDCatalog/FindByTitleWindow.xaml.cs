@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -16,45 +15,41 @@ namespace CapstoneCDCatalog
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            if (titleToSearchForTextBox.Text != string.Empty)
-            {
-                string titleToSearchFor = titleToSearchForTextBox.Text;
+            if (titleToSearchForTextBox.Text == string.Empty) return;
+            var titleToSearchFor = titleToSearchForTextBox.Text;
                 
-                messageTextBlock.Text = SearchForSong(titleToSearchFor) ? "The song has been found!" : "The song was not found";
-                messageTextBlock.Text = SearchForAlbum(titleToSearchFor) ? "The album has been found!" : "The album or song does not exist.";
-            }
+            messageTextBlock.Text = SearchForSong(titleToSearchFor) ? "The song has been found!" : "The song was not found";
+            messageTextBlock.Text = SearchForAlbum(titleToSearchFor) ? "The album has been found!" : "The album or song does not exist.";
         }
 
         private bool SearchForAlbum(string titleToSearchFor)
         {
-            List<Album> album = new List<Album>();
-            album = SongAccess.AlbumService.DoesAlbumExists(titleToSearchFor);
-            if (album[0] != null)
-            {
-                albumDataGrid.ItemsSource = album;
-                return true;
-            }
-            return false;
+            var album = SongAccess.AlbumService.DoesAlbumExists(titleToSearchFor);
+            if (album[0] == null) return false;
+            albumDataGrid.ItemsSource = album;
+            return true;
         }
 
         private bool SearchForSong(string titleToSearchFor)
         {
-            List<Song> song = new List<Song>();
-            song = SongAccess.DoesSongExist(titleToSearchFor);
-            if (song[0] != null)
-            {
-                songOrCdDataGrid.ItemsSource = song;
-                return true;
-            }
-            return false;
+            var song = SongAccess.DoesSongExist(titleToSearchFor);
+            if (song[0] == null) return false;
+            var playlist = new ListViewService();
+            songOrCdDataGrid.ItemsSource = playlist.CreateViewItem(song);
+            return true;
         }
 
         private void songOrCdDataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "SongID" || e.PropertyName == "GenreId" || e.PropertyName == "AlbumId" || e.PropertyName == "ArtistId")
-            {
-                e.Cancel = true;
-            }
+            CellFormating.SupressIdValues(e);
+            CellFormating.SpaceOutNames(e);
+        }
+
+        public void albumDataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
+        {
+            CellFormating.SupressIdValues(e);
+            CellFormating.SuppressAlbumData(e);
+            CellFormating.SpaceOutNames(e);
         }
     }
 }

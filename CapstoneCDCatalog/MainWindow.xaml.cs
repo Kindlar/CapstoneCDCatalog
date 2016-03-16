@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using CapstoneCDCatalog.Services;
 
 namespace CapstoneCDCatalog
@@ -43,7 +45,7 @@ namespace CapstoneCDCatalog
         {
             if (Access != null)
             {
-                var songList = Access.GetSongList().ToArray();
+                var songList = Access.GetSongList().ToList();
                 DisplaySong(songList);
             }
         }
@@ -83,7 +85,7 @@ namespace CapstoneCDCatalog
         {
             if (Access != null)
             {
-                var songList = Access.GetSongListByAlbum(selectedItems).ToArray();
+                var songList = Access.GetSongListByAlbum(selectedItems).ToList();
                 DisplaySong(songList);
             }           
         }
@@ -100,12 +102,12 @@ namespace CapstoneCDCatalog
         {
             if (Access != null)
             {
-                var songList = Access.GenreService.GetSongListByGenre(selectedItem).ToArray();
+                var songList = Access.GenreService.GetSongListByGenre(selectedItem).ToList();
                 DisplaySong(songList);
             }
         }
 
-        private void DisplaySong(Song[] songList)
+        private void DisplaySong(List<Song> songList)
         {
             songListBox.Items.Clear();
             foreach (var song in songList)
@@ -121,11 +123,9 @@ namespace CapstoneCDCatalog
 
         private void DisplaySongsByArtist(string selectedItem)
         {
-            if (Access != null)
-            {
-                var songList = Access.GetSongListByArtist(selectedItem).ToArray();
-                DisplaySong(songList);
-            }
+            if (Access == null) return;
+            var songList = Access.GetSongListByArtist(selectedItem).ToList();
+            DisplaySong(songList);
         }
 
         private static void DisplayError()

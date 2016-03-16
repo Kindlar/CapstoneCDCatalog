@@ -20,18 +20,17 @@ namespace CapstoneCDCatalog
                 int year, albumRating;
                 int.TryParse(albumYearTextBox.Text, out year);
                 int.TryParse(albumRatingComboBox.Text, out albumRating);
-                string albumTitle = albumTitleTextBox.ToString();
+                var albumTitle = albumTitleTextBox.ToString();
 
-                if (!Access.AlbumService.DoesAlbumExists(albumTitle, albumRating))
+                if (Access.AlbumService.DoesAlbumExists(albumTitle, albumRating))
+                {
+                    addAlbumTextBlock.Text = "Album already is present in catalog";
+                }
+                else
                 {
                     AddAlbum(albumTitle, year, albumRating);
                     addAlbumTextBlock.Text = "The album has been added!";
                 }
-                else
-                {
-                    addAlbumTextBlock.Text = "Album already is present in catalog";
-                }
-
             }
             else
             {
@@ -41,12 +40,10 @@ namespace CapstoneCDCatalog
 
         private bool AreTextInputsValid()
         {
-            if (!string.IsNullOrEmpty(artistTextBox.Text)
-                && !string.IsNullOrEmpty(albumTitleTextBox.Text)
-                && !string.IsNullOrEmpty(albumYearTextBox.Text)
-                && !string.IsNullOrEmpty(albumRatingComboBox.Text))
-                return true;
-            return false;
+            return !string.IsNullOrEmpty(artistTextBox.Text)
+                   && !string.IsNullOrEmpty(albumTitleTextBox.Text)
+                   && !string.IsNullOrEmpty(albumYearTextBox.Text)
+                   && !string.IsNullOrEmpty(albumRatingComboBox.Text);
         }
 
         private void AddAlbum(string albumTitle, int year, int albumRating)
